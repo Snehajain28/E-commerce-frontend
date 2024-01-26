@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import toast from "react-hot-toast";
 import { RxHome } from "react-icons/rx";
-import { useStateValues } from "../Utils/Provider";
 
 export default  function SignIn() {
 
