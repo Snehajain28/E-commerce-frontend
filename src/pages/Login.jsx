@@ -10,8 +10,8 @@ export default function Login() {
     const navigate = useNavigate();
 
  
-    const [{}, dispatch] = useStateValues();
-
+    const [{user}, dispatch] = useStateValues();
+console.log(user)
     const [formData, setformData] = useState({
         email: "",
         password: "",

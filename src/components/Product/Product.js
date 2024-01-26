@@ -4,7 +4,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 import ProductCard from './ProductCard'
 import {gounsPage1} from  '../../data/Gouns/gouns'
-import { useLocation } from 'react-router-dom'
 
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
@@ -62,10 +61,6 @@ function classNames(...classes) {
 
 export default function Product() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false)
-
-  const location= useLocation();
-
-
 
 
   return (

@@ -5,7 +5,7 @@ const Card = ( {item}) =>
 <div className="h-[15rem] w-[10rem]"
 >
     <img  className="object-cover object-top w-full rounded-md h-full "
-   src={item.image}></img>
+ alt=""  src={item.image}></img>
 
 </div>
 <div className="p-4"> 

@@ -222,8 +222,7 @@ export default function Navbar() {
                               <p id={`${category.id}-${section.id}-heading-mobile`} className="font-medium text-gray-900">
                                 {section.name}
                               </p>
-                              <ul
-                                role="list"
+                              <div
                                 aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
                                 className="mt-6 flex flex-col space-y-6"
                               >
@@ -234,7 +233,7 @@ export default function Navbar() {
                                     </a>
                                   </li>
                                 ))}
-                              </ul>
+                              </div>
                             </div>
                           ))}
                         </Tab.Panel>
@@ -310,14 +309,14 @@ export default function Navbar() {
 
 
                 <div className="ml-4 flex lg:ml-0">
-                  <a href="#">
+                  <Link>
                     <span className="sr-only">Your Company</span>
                     <img
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                       alt=""
                     />
-                  </a>
+                  </Link>
                 </div>
 
 
@@ -381,8 +380,7 @@ export default function Navbar() {
                                             <p id={`${section.name}-heading`} className="font-medium text-gray-900">
                                               {section.name}
                                             </p>
-                                            <ul
-                                              role="list"
+                                            <div
                                               aria-labelledby={`${section.name}-heading`}
                                               className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                             >
@@ -393,7 +391,7 @@ export default function Navbar() {
                                                   </a>
                                                 </li>
                                               ))}
-                                            </ul>
+                                            </div>
                                           </div>
                                         ))}
                                       </div>
@@ -448,22 +446,22 @@ export default function Navbar() {
                 }
                 <div className="ml-auto flex items-center">
                   <div className="flex lg:ml-6">
-                    <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
+                    <Link className="p-2 text-gray-400 hover:text-gray-500">
                       <span className="sr-only">Search</span>
                       <MagnifyingGlassIcon className="h-6 w-6" aria-hidden="true" />
-                    </a>
+                    </Link>
                   </div>
 
-                  {/* Cart */}
+                
                   <div className="ml-4 flow-root lg:ml-6">
-                    <a href="#" className="group -m-2 flex items-center p-2">
+                    <Link className="group -m-2 flex items-center p-2">
                       <ShoppingBagIcon
                         className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
                       <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                       <span className="sr-only">items in cart, view bag</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

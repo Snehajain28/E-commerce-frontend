@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Card from '../Card/Card.js';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@mui/icons-material';
-
-
+i
 
 const HomeCarousel = ({ CarouselData, sectionName }) => {
 
-    const [activeIndex, setActiveIndex] = useState(0)
-
-    const responsive = {
+   const responsive = {
         0: { items: 1 },
         600: { items: 2 },
         720: { items: 3 },

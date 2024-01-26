@@ -8,8 +8,8 @@ import { useStateValues } from "../Utils/Provider";
 export default  function SignIn() {
 
     const navigate = useNavigate();
-    const [{} , dispatch] = useStateValues();
-  const [formData, setformData] = useState({
+  
+    const [formData, setformData] = useState({
         name: "",
         email: "",
        location: "",
@@ -31,7 +31,7 @@ export default  function SignIn() {
     name:formData.name,
     email:formData.email,
     password:formData.password,
-    phoneNumber:formData. phoneNumber,
+    phoneNumber:formData.phoneNumber,
     location:formData.location,
     
   });

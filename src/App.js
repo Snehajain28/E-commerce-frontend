@@ -26,7 +26,7 @@ const [{user,token} ,dispatch] =useStateValues();
         token:(JSON.parse(data).token),
     });
     }
-  }) ,[])
+  }) ,[user,token,dispatch])
 
   return (
     <div >
