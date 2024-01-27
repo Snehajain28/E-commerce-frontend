@@ -26,7 +26,7 @@ export default  function SignIn() {
   const handleSubmit = async(e)=> {
    e.preventDefault();
 
-   const res = await axios.post(`${process.env.BASE_URL}/api/v1/user/register`, {
+   const res = await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/register', {
     name:formData.name,
     email:formData.email,
     password:formData.password,

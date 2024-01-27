@@ -9,6 +9,7 @@ import { Policy } from "@mui/icons-material";
 import Pagenotfound from "./pages/PageNotFound";
 import { useEffect } from "react";
 import { useStateValues } from "./Utils/Provider";
+import ProductForm from "./pages/ProductForm";
 
 function App() {
 const [{user,token} ,dispatch] =useStateValues();
@@ -38,6 +39,7 @@ const [{user,token} ,dispatch] =useStateValues();
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
+        <Route path="/product-form" element={<ProductForm/>} />
         <Route path="*" element={<Pagenotfound />} />
 
         {/*    <Route path="/product/:slug" element={<ProductDetails />} />

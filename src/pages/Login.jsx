@@ -29,7 +29,7 @@ console.log(user)
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await axios.post(`${process.env.BASE_URL}/api/v1/user/login`, { email: formData.email, password: formData.password }
+        await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/login', { email: formData.email, password: formData.password }
         ).then((response) => {
             toast.success(response.data && response.data.message);
             dispatch({
