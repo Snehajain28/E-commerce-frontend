@@ -31,7 +31,7 @@ const ProductForm = () => {
         formData.append('discountedprice', Data.discountedprice)
         formData.append('image', image)
 
-        const res = await axios.post('http://localhost:5000/api/v1/product/add-product', formData, {
+        const res = await axios.post('https://e-commerce-6zry.onrender.com/api/v1/product/add-product', formData, {
             headers: { "Content-type": "multipart/form-data" },
         });
 console.log(res)
