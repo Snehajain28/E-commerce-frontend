@@ -8,7 +8,7 @@ function Cart() {
 
     const [totalamount, settoalamout] = useState(0);
     const [{ cartData }, dispatch] = useStateValues();
-
+console.log(dispatch)
     useEffect((
         () => {
             let amt = 0;
@@ -34,9 +34,10 @@ function Cart() {
                     <div className="flex flex-col md:flex-row md:gap-10">
                         <div className="w-[50vw] h-[80vh] mt-[5rem] overflow-y-auto">
                             {cartData?.map((item) => {
-                             return <CartItem key={item.id} item={item}></CartItem>
+                             return (<CartItem key={item.id} item={item}></CartItem>)
 
-                })
+                }
+                                          )
                             }
                         </div>
 
