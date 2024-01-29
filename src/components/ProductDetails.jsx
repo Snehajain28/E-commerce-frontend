@@ -252,7 +252,7 @@ export default function ProductDetails() {
                               
                                       }
                                       else {
-                                          cnt = count - 1
+                                         
                                           let i = cartData.indexOf(productDetails)
                                           cartData.splice(i, 1)
                               
