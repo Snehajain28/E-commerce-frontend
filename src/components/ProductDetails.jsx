@@ -58,7 +58,7 @@ export default function ProductDetails() {
         }
         localStorage.setItem("cart", JSON.stringify(cartData));
       
-    }), [])
+    }), [cartData])
 
     return (
         <div className="bg-white">
