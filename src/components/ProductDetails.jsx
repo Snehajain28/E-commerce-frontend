@@ -58,7 +58,7 @@ export default function ProductDetails() {
         }
         localStorage.setItem("cart", JSON.stringify(cartData));
       
-    }), [cartData])
+    }), [cartData,productDetails])
 
     return (
         <div className="bg-white">
@@ -240,9 +240,9 @@ export default function ProductDetails() {
                                           navigate('/')
                                           return;
                                       }
-                                      let cnt;
+                                      
                                       if (!click) {
-                                          cnt = count + 1
+                                        
                                           let arr = cartData
                                           arr.push(productDetails)
                                           dispatch({
