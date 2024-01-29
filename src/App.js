@@ -13,8 +13,8 @@ import ProductForm from "./pages/ProductForm";
 import Cart from "./pages/Cart";
 
 function App() {
-  const [{user,token,cartData} ,dispatch] =useStateValues();
-
+  const [{user} ,dispatch] =useStateValues();
+console.log(user)
  
   useEffect( ( () => {
     const data = localStorage.getItem("user");
@@ -42,7 +42,7 @@ function App() {
     
   }
     }
-  ), [])
+  ), [dispatch])
 
 
   return (
