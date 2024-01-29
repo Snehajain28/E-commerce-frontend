@@ -13,32 +13,37 @@ import ProductForm from "./pages/ProductForm";
 import Cart from "./pages/Cart";
 
 function App() {
-  const [{user,token} ,dispatch] =useStateValues();
+  const [{user,token,cartData} ,dispatch] =useStateValues();
 
+ 
   useEffect( ( () => {
     const data = localStorage.getItem("user");
+    let cart = localStorage.getItem("cart");
    if(data)
     {
       dispatch({
         type: "SET_USER",
         user:(JSON.parse(data).user),
     });
+
     dispatch({
         type: "SET_TOKEN",
         token:(JSON.parse(data).token),
     });
 
     }
-  }) ,[user,token,dispatch])
-
-  useEffect((
-    () => {
+    if (cart){
+    cart=JSON.parse(localStorage.cart)
       dispatch({
-        type: "SET_COUNT",
-        count: 0,
-      })
+        type: "SET_CART_DATA",
+        cartData:(cart),
+       
+    })
+    
+  }
     }
   ), [])
+
 
   return (
     <div className='overflow-x-hidden' >

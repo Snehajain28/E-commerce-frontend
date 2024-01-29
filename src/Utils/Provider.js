@@ -5,9 +5,8 @@ export const ContextData = createContext();
 const initialState = {
  user:null,
  token:"",
- count:0,
  productDetails:null,
- cartData:null,
+ cartData:[],
 }
 
 
@@ -29,11 +28,7 @@ const reducers = (state, action) => {
         ...state,
         productDetails:action.productDetails,
       };
-      case "SET_COUNT":
-      return {
-        ...state,
-        count: action.count,
-      };
+     
       case "SET_TOKEN":
         return {
           ...state,

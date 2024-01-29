@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { Link, useNavigate } from 'react-router-dom'
@@ -46,9 +46,19 @@ function classNames(...classes) {
 export default function ProductDetails() {
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-    const [{ productDetails,count,user }, dispatch] = useStateValues();
-const[click,setClick]=useState(false)
-const navigate=useNavigate()
+    const [{ productDetails, count, user, cartData }, dispatch] = useStateValues();
+    const [click, setClick] = useState(false)
+    const navigate = useNavigate()
+
+    useEffect((() => {
+        let i = cartData?.indexOf(productDetails)
+        if (i !== -1) {
+
+            setClick(true)
+        }
+        localStorage.setItem("cart", JSON.stringify(cartData));
+      
+    }), [])
 
     return (
         <div className="bg-white">
@@ -76,7 +86,7 @@ const navigate=useNavigate()
                         ))}
                         <li className="text-sm">
                             <p aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                                {((productDetails.title).substring(0,10))}
+                                {((productDetails.title).substring(0, 10))}
                             </p>
                         </li>
                     </ol>
@@ -125,7 +135,7 @@ const navigate=useNavigate()
                                     </div>
                                 </div>
 
-                                <div className="mt-10 lg:mt-15"> 
+                                <div className="mt-10 lg:mt-15">
                                     <div>
                                         <h3 className="text-sm font-medium text-gray-900">Color</h3>
 
@@ -224,33 +234,45 @@ const navigate=useNavigate()
                                         </RadioGroup>
                                     </div>
 
-                                    <button onClick={ () => {
-                                       setClick(!click)
-                                       if (!user) {
-                                           navigate('/')
-                                           return;
-                                       }
-                                       let cnt;
-                                       if (click) {
-                                           cnt = count + 1
-                                       }
-                                       else {
-                                           cnt = count - 1
-                                       }
-                                       dispatch({
-                                           type: "SET_COUNT",
-                                           count: cnt,
-                                       });
-                                    }}
+                                    <button onClick={() => {
+                                      setClick(!click)
+                                      if (!user) {
+                                          navigate('/')
+                                          return;
+                                      }
+                                      let cnt;
+                                      if (!click) {
+                                          cnt = count + 1
+                                          let arr = cartData
+                                          arr.push(productDetails)
+                                          dispatch({
+                                              type: "SET_CART_DATA",
+                                              cartData: arr,
+                                          })
+                              
+                                      }
+                                      else {
+                                          cnt = count - 1
+                                          let i = cartData.indexOf(productDetails)
+                                          cartData.splice(i, 1)
+                              
+                                          dispatch({
+                                              type: "SET_CART_DATA",
+                                              cartData: cartData,
+                                          })
+                                      }
+                                     
+                                      localStorage.setItem("cart", JSON.stringify(cartData));
+                                      }}
                                         className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                     >
-                                      {!click?("Add to bag"):("Remove from bag")}
+                                        {!click ? ("Add to bag") : ("Remove from bag")}
                                     </button>
                                 </div>
                             </div>
                         </div>
                         <div className=" ml-5  lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
-                        
+
                             <div>
                                 <h3 className="sr-only">Description</h3>
 

@@ -1,12 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useStateValues } from '../Utils/Provider';
 import { useNavigate } from 'react-router-dom';
 
 export default function Card({ item }) {
 
     const navigate = useNavigate();
-    const [click, setClick] = useState(true)
-    const [{ user, count }, dispatch] = useStateValues();
+    const [click, setClick] = useState(false)
+    const [{ user, cartData }, dispatch] = useStateValues();
+
+    useEffect((() => {
+
+        if (cartData?.length > 0) {
+            cartData.forEach(element => {
+
+                if (element.image == item.image) {
+                    setClick(true)
+                }
+            });
+        }
+    }), [])
 
     const handleClick = () => {
 
@@ -27,20 +39,32 @@ export default function Card({ item }) {
     const handleCart = () => {
         setClick(!click)
         if (!user) {
-            navigate('/')
+            navigate('/login')
             return;
         }
-        let cnt;
-        if (click) {
-            cnt = count + 1
+     
+        if (!click) {
+            
+            let arr = cartData
+            arr.push(item)
+            dispatch({
+                type: "SET_CART_DATA",
+                cartData: arr,
+            })
+
         }
         else {
-            cnt = count - 1
+           
+            let i = cartData.indexOf(item)
+            cartData.splice(i, 1)
+
+            dispatch({
+                type: "SET_CART_DATA",
+                cartData: cartData,
+            })
         }
-        dispatch({
-            type: "SET_COUNT",
-            count: cnt,
-        });
+
+        localStorage.setItem("cart", JSON.stringify(cartData));
 
     }
 
@@ -64,7 +88,7 @@ export default function Card({ item }) {
                 </div>
             </div>
             <button onClick={handleCart} className='w-11/12 mx-auto rounded-md h-[2rem] text-white font-semibold  bg-blue-500 my-4 '>
-                {click ? ("Add to Cart") : ("Remove from Cart")}
+                {click ? ("Remove from Cart") : ("Add to Cart")}
             </button>
         </div>
     )

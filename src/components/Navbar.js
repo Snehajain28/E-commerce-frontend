@@ -137,7 +137,7 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [{ user ,count}, dispatch] = useStateValues();
+  const [{ user ,cartData}, dispatch] = useStateValues();
 
   return (
     <div className="bg-white z-30 w-full top-0 fixed">
@@ -429,7 +429,14 @@ export default function Navbar() {
                         type: "SET_TOKEN",
                         token: "",
                       })
+                      dispatch({
+                        type: "SET_CART_DATA",
+                        cartData:[],
+                      })
                       localStorage.removeItem("user");
+                      localStorage.removeItem("token");
+                      localStorage.removeItem("cart");
+
                     }}
                     ><Link to={'/'} className="text-sm font-medium text-gray-700 hover:text-gray-800">
                         Log Out
@@ -459,7 +466,7 @@ export default function Navbar() {
                         className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
-                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span>
+                      <span className=" mb-7 text-sm animate-bounce font-medium  bg-red-500 text-white rounded-full px-2 ">{ (cartData?.length)}</span>
                       <span className="sr-only">items in cart, view bag</span>
                     </Link>
                   </div>

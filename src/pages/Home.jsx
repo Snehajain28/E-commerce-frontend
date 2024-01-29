@@ -11,11 +11,8 @@ import { sareePage1 } from '../data/Saree/page1';
 import { lehngacholiPage2 } from '../data/Saree/lenghaCholiPage2';
 import { mensPantsPage1 } from '../data/pants/men_page1';
 import { dressPage1 } from '../data/dress/page1';
-import { useEffect } from 'react';
-import { useStateValues } from '../Utils/Provider';
 
 function Home() {
-  const [{ user, token }, dispatch] = useStateValues();
 
 
   return (
