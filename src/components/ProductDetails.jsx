@@ -46,7 +46,7 @@ function classNames(...classes) {
 export default function ProductDetails() {
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-    const [{ productDetails, count, user, cartData }, dispatch] = useStateValues();
+    const [{ productDetails,  user, cartData }, dispatch] = useStateValues();
     const [click, setClick] = useState(false)
     const navigate = useNavigate()
 
