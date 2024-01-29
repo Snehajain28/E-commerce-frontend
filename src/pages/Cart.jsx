@@ -33,10 +33,10 @@ function Cart() {
                     </div>
                     <div className="flex flex-col md:flex-row md:gap-10">
                         <div className="w-[50vw] h-[80vh] mt-[5rem] overflow-y-auto">
-                            {cartData?.map((item) => (
-                                <CartItem key={item.id} item={item}></CartItem>
+                            {cartData?.map((item) => {
+                             return(   <CartItem key={item.id} item={item}></CartItem>)
 
-                            ))
+                })
                             }
                         </div>
 
