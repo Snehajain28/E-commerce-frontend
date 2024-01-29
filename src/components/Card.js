@@ -13,12 +13,12 @@ export default function Card({ item }) {
         if (cartData?.length > 0) {
             cartData.forEach(element => {
 
-                if (element.image == item.image) {
+                if (element.image === item.image) {
                     setClick(true)
                 }
             });
         }
-    }), [])
+    }), [cartData,item.image])
 
     const handleClick = () => {
 
