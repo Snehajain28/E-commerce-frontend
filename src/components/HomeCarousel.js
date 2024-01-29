@@ -1,13 +1,14 @@
 import React from 'react';
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
-import Card from '../Card/Card.js';
+import Card from './Card.js';
 
 
 const HomeCarousel = ({ CarouselData, sectionName }) => {
 
    const responsive = {
         0: { items: 1 },
+        400:{items:1.25},
         600: { items: 2 },
         720: { items: 3 },
         1024: { items: 4 },

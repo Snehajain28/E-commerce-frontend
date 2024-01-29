@@ -137,10 +137,10 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const [{ user }, dispatch] = useStateValues();
+  const [{ user ,count}, dispatch] = useStateValues();
 
   return (
-    <div className="bg-white z-30  relative">
+    <div className="bg-white z-30 w-full top-0 fixed">
       <div className=''>
         <Transition.Root show={open} as={Fragment}>
           <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -454,12 +454,12 @@ export default function Navbar() {
 
                 
                   <div className="ml-4 flow-root lg:ml-6">
-                    <Link className="group -m-2 flex items-center p-2">
+                    <Link to={'/cart'} className="group -m-2 flex items-center p-2">
                       <ShoppingBagIcon
                         className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                         aria-hidden="true"
                       />
-                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                      <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span>
                       <span className="sr-only">items in cart, view bag</span>
                     </Link>
                   </div>

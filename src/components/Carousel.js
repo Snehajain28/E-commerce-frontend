@@ -30,7 +30,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 
 
 const items = main_Carousel.map((item) => 
- {return ( <img alt="" src={item.img} className='-z-10'></img>)})
+ {return ( <img alt="" src={item.img} className='-z-10 '></img>)})
 
 const Carousel = () => (
 <div className=''>

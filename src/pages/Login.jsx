@@ -2,16 +2,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { RxHome } from "react-icons/rx";
 import { useStateValues } from "../Utils/Provider";
+import Spinner from "../components/Spinner";
 
 export default function Login() {
 
     const navigate = useNavigate();
+const [spinner,setSpinner] = useState(false)
+   const [{user}, dispatch] = useStateValues();
 
- 
-    const [{user}, dispatch] = useStateValues();
 console.log(user)
+
     const [formData, setformData] = useState({
         email: "",
         password: "",
@@ -27,9 +28,9 @@ console.log(user)
 
 
     const handleSubmit = async (e) => {
+        setSpinner(true);
         e.preventDefault();
-
-        await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/login', { email: formData.email, password: formData.password }
+   await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/login', { email: formData.email, password: formData.password }
         ).then((response) => {
             toast.success(response.data && response.data.message);
             dispatch({
@@ -47,25 +48,23 @@ console.log(user)
             .catch((e) => {
                 console.log(e)
             })
+            setSpinner(false)
     }
 
 
-    return (<div className=" w-[100vw] ">
+    return (<div className=" w-[100vw] h-[100vh]">
 
-        <div className="">
-            <RxHome
-                className=""
-                size={40} />
+        <div className="mt-[50%]">
 
-            <div className="relative flex flex-col items-center justify-center min-h-11/12 w-11/12 md:w-4/12 mx-auto ">
-                <div className="w-full p-6   mt-[10rem] m-auto bg-transparent rounded-md shadow-xl shadow-rose-800/40  lg:max-w-xl">
+            <div className=" flex flex-col  min-h-11/12 w-11/12 sm:w-6/12  m-auto ">
+                <div className="w-full p-6   mt-[10rem] m-auto bg-transparent rounded-md shadow-xl shadow-gray-800/40  lg:max-w-xl">
+                  
                     <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase ">
                         Login
                     </h1>
                     <form onSubmit={handleSubmit}
                         className="mt-6">
-
-                        <div className="mb-2">
+  <div className="mb-2">
                             <label
                                 htmlFor="email"
                                 className="block text-sm font-semibold text-gray-800"
@@ -74,6 +73,7 @@ console.log(user)
                             </label>
                             <input
                                 type="email"
+                                required
                                 placeholder="email"
                                 onChange={changeHandler}
                                 value={formData.email}
@@ -95,12 +95,13 @@ console.log(user)
                                 value={formData.password}
                                 onChange={changeHandler}
                                 name="password"
+                                required
                                 className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                             />
                         </div>
                         <div className="mt-6">
-                            <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-                                Login
+                            <button className="w-full h-[3rem] px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                            {  !spinner ?("Login"):(<Spinner className='h-[0.2rem] w-[0.2rem]'/>)}
                             </button>
                         </div>
                     </form>

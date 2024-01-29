@@ -4,7 +4,7 @@ export const kurtaPage1=[
         "brand": "WOXEN",
         "title": "Women Kurta and Pant Set Art Silk",
         "color": "",
-        "selling_price": "₹699",
+        "discountedPrice": "₹699",
         "price": "₹2,899",
         "disscount": "75% off",
         "size": ""
@@ -14,7 +14,7 @@ export const kurtaPage1=[
         "brand": "LIBAS",
         "title": "Women Kurta and Palazzo Set Cotton Blend",
         "color": "",
-        "selling_price": "₹1,082",
+        "discountedPrice": "₹1,082",
         "price": "₹2,799",
         "disscount": "61% off",
         "size": ""
@@ -24,7 +24,7 @@ export const kurtaPage1=[
         "brand": "Samah",
         "title": "Women Kurta, Pant And Dupatta Set Silk Blend, Cotton Bl...",
         "color": "",
-        "selling_price": "₹702",
+        "discountedPrice": "₹702",
         "price": "₹3,997",
         "disscount": "82% off",
         "size": ""
@@ -34,7 +34,7 @@ export const kurtaPage1=[
         "brand": "Klosia",
         "title": "Women Kurta, Pant And Dupatta Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹664",
+        "discountedPrice": "₹664",
         "price": "₹2,999",
         "disscount": "77% off",
         "size": ""
@@ -44,7 +44,7 @@ export const kurtaPage1=[
         "brand": "shoecom",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹433",
+        "discountedPrice": "₹433",
         "price": "₹2,995",
         "disscount": "85% off",
         "size": ""
@@ -54,7 +54,7 @@ export const kurtaPage1=[
         "brand": "PRISCA",
         "title": "Women Kurta and Pant Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹779",
+        "discountedPrice": "₹779",
         "price": "₹1,299",
         "disscount": "40% off",
         "size": ""
@@ -64,7 +64,7 @@ export const kurtaPage1=[
         "brand": "The Style Story",
         "title": "Women Kurta, Pyjama & Dupatta Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹748",
+        "discountedPrice": "₹748",
         "price": "₹1,999",
         "disscount": "62% off",
         "size": ""
@@ -74,7 +74,7 @@ export const kurtaPage1=[
         "brand": "Marudhara",
         "title": "Women Kurta and Pant Set Pure Cotton",
         "color": "",
-        "selling_price": "₹499",
+        "discountedPrice": "₹499",
         "price": "₹1,999",
         "disscount": "75% off",
         "size": ""
@@ -84,7 +84,7 @@ export const kurtaPage1=[
         "brand": "Vbuyz",
         "title": "Women Kurta, Pant And Dupatta Set Pure Cotton",
         "color": "",
-        "selling_price": "₹1,540",
+        "discountedPrice": "₹1,540",
         "price": "₹5,799",
         "disscount": "73% off",
         "size": ""
@@ -94,7 +94,7 @@ export const kurtaPage1=[
         "brand": "Klosia",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹664",
+        "discountedPrice": "₹664",
         "price": "₹2,999",
         "disscount": "77% off",
         "size": ""
@@ -104,7 +104,7 @@ export const kurtaPage1=[
         "brand": "LIBAS",
         "title": "Women Kurta and Palazzo Set Silk Blend",
         "color": "",
-        "selling_price": "₹1,557",
+        "discountedPrice": "₹1,557",
         "price": "₹3,499",
         "disscount": "55% off",
         "size": ""
@@ -114,7 +114,7 @@ export const kurtaPage1=[
         "brand": "flamingo blue",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹799",
+        "discountedPrice": "₹799",
         "price": "₹2,199",
         "disscount": "63% off",
         "size": ""
@@ -124,7 +124,7 @@ export const kurtaPage1=[
         "brand": "Jai Kurties",
         "title": "Women Kurta and Pant Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹476",
+        "discountedPrice": "₹476",
         "price": "₹1,999",
         "disscount": "76% off",
         "size": ""
@@ -134,7 +134,7 @@ export const kurtaPage1=[
         "brand": "Stylum",
         "title": "Women Kurta and Pant Set Cotton Blend",
         "color": "",
-        "selling_price": "₹769",
+        "discountedPrice": "₹769",
         "price": "₹2,499",
         "disscount": "69% off",
         "size": ""
@@ -144,7 +144,7 @@ export const kurtaPage1=[
         "brand": "NEW STYLISH",
         "title": "Women Kurta and Palazzo Set Cotton Blend",
         "color": "",
-        "selling_price": "₹492",
+        "discountedPrice": "₹492",
         "price": "₹1,999",
         "disscount": "75% off",
         "size": ""
@@ -154,7 +154,7 @@ export const kurtaPage1=[
         "brand": "SheWill",
         "title": "Women Kurta, Pant And Dupatta Set Silk Blend",
         "color": "",
-        "selling_price": "₹1,649",
+        "discountedPrice": "₹1,649",
         "price": "₹7,359",
         "disscount": "77% off",
         "size": ""
@@ -164,7 +164,7 @@ export const kurtaPage1=[
         "brand": "flamingo blue",
         "title": "Women Kurta and Pant Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹499",
+        "discountedPrice": "₹499",
         "price": "₹1,899",
         "disscount": "73% off",
         "size": ""
@@ -174,7 +174,7 @@ export const kurtaPage1=[
         "brand": "shobhit",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹599",
+        "discountedPrice": "₹599",
         "price": "₹1,699",
         "disscount": "64% off",
         "size": ""
@@ -184,7 +184,7 @@ export const kurtaPage1=[
         "brand": "Klosia",
         "title": "Women Kurta and Dupatta Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹654",
+        "discountedPrice": "₹654",
         "price": "₹2,999",
         "disscount": "78% off",
         "size": ""
@@ -194,7 +194,7 @@ export const kurtaPage1=[
         "brand": "NEW STYLISH",
         "title": "Women Kurta and Palazzo Set Cotton Blend",
         "color": "",
-        "selling_price": "₹488",
+        "discountedPrice": "₹488",
         "price": "₹1,999",
         "disscount": "75% off",
         "size": ""
@@ -204,7 +204,7 @@ export const kurtaPage1=[
         "brand": "shobhit",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹405",
+        "discountedPrice": "₹405",
         "price": "₹1,899",
         "disscount": "78% off",
         "size": ""
@@ -214,7 +214,7 @@ export const kurtaPage1=[
         "brand": "AAYUFAB",
         "title": "Women Kurta, Pant And Dupatta Set Pure Cotton",
         "color": "",
-        "selling_price": "₹999",
+        "discountedPrice": "₹999",
         "price": "₹1,999",
         "disscount": "50% off",
         "size": ""
@@ -224,7 +224,7 @@ export const kurtaPage1=[
         "brand": "AHIKA",
         "title": "Women Kurta and Pant Set Crepe",
         "color": "",
-        "selling_price": "₹413",
+        "discountedPrice": "₹413",
         "price": "₹2,497",
         "disscount": "83% off",
         "size": ""
@@ -234,7 +234,7 @@ export const kurtaPage1=[
         "brand": "Klosia",
         "title": "Women Kurta and Pant Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹664",
+        "discountedPrice": "₹664",
         "price": "₹2,999",
         "disscount": "77% off",
         "size": ""
@@ -244,7 +244,7 @@ export const kurtaPage1=[
         "brand": "Vastranikhar",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹623",
+        "discountedPrice": "₹623",
         "price": "₹2,999",
         "disscount": "79% off",
         "size": ""
@@ -254,7 +254,7 @@ export const kurtaPage1=[
         "brand": "Emperus",
         "title": "Women Kurta and Skirt Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹545",
+        "discountedPrice": "₹545",
         "price": "₹2,999",
         "disscount": "81% off",
         "size": ""
@@ -264,7 +264,7 @@ export const kurtaPage1=[
         "brand": "W",
         "title": "Women Kurta and Palazzo Set Pure Cotton",
         "color": "",
-        "selling_price": "₹1,399",
+        "discountedPrice": "₹1,399",
         "price": "₹3,999",
         "disscount": "65% off",
         "size": ""
@@ -274,7 +274,7 @@ export const kurtaPage1=[
         "brand": "VredeVogel",
         "title": "Women Kurta, Pant And Dupatta Set Cotton Silk",
         "color": "",
-        "selling_price": "₹999",
+        "discountedPrice": "₹999",
         "price": "₹4,299",
         "disscount": "76% off",
         "size": ""
@@ -284,7 +284,7 @@ export const kurtaPage1=[
         "brand": "Klosia",
         "title": "Women Kurta, Pant And Dupatta Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹664",
+        "discountedPrice": "₹664",
         "price": "₹2,999",
         "disscount": "77% off",
         "size": ""
@@ -294,7 +294,7 @@ export const kurtaPage1=[
         "brand": "VredeVogel",
         "title": "Women Kurta and Pant Set Silk Blend",
         "color": "",
-        "selling_price": "₹779",
+        "discountedPrice": "₹779",
         "price": "₹2,999",
         "disscount": "74% off",
         "size": ""
@@ -304,7 +304,7 @@ export const kurtaPage1=[
         "brand": "AAYUFAB",
         "title": "Women Kurta and Pant Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹619",
+        "discountedPrice": "₹619",
         "price": "₹1,499",
         "disscount": "58% off",
         "size": ""
@@ -314,7 +314,7 @@ export const kurtaPage1=[
         "brand": "AAYUFAB",
         "title": "Women Kurta and Pant Set Cotton Blend",
         "color": "",
-        "selling_price": "₹649",
+        "discountedPrice": "₹649",
         "price": "₹1,999",
         "disscount": "67% off",
         "size": ""
@@ -324,7 +324,7 @@ export const kurtaPage1=[
         "brand": "Vbuyz",
         "title": "Women Kurta, Pyjama & Dupatta Set Pure Cotton",
         "color": "",
-        "selling_price": "₹1,454",
+        "discountedPrice": "₹1,454",
         "price": "₹4,499",
         "disscount": "67% off",
         "size": ""
@@ -334,7 +334,7 @@ export const kurtaPage1=[
         "brand": "shoecom",
         "title": "Women Kurta and Palazzo Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹433",
+        "discountedPrice": "₹433",
         "price": "₹2,995",
         "disscount": "85% off",
         "size": ""
@@ -344,7 +344,7 @@ export const kurtaPage1=[
         "brand": "Klosia",
         "title": "Women Kurta and Pant Set Pure Cotton",
         "color": "",
-        "selling_price": "₹699",
+        "discountedPrice": "₹699",
         "price": "₹2,999",
         "disscount": "76% off",
         "size": ""
@@ -354,7 +354,7 @@ export const kurtaPage1=[
         "brand": "TRAHIMAM",
         "title": "Women Kurta and Pant Set Cotton Blend",
         "color": "",
-        "selling_price": "₹389",
+        "discountedPrice": "₹389",
         "price": "₹1,999",
         "disscount": "80% off",
         "size": ""
@@ -364,7 +364,7 @@ export const kurtaPage1=[
         "brand": "Maa Collection",
         "title": "Women Kurta, Pant And Dupatta Set Viscose Rayon",
         "color": "",
-        "selling_price": "₹679",
+        "discountedPrice": "₹679",
         "price": "₹1,299",
         "disscount": "47% off",
         "size": ""
@@ -374,7 +374,7 @@ export const kurtaPage1=[
         "brand": "LIBAS",
         "title": "Women Kurta and Palazzo Set Cotton Blend",
         "color": "",
-        "selling_price": "₹1,019",
+        "discountedPrice": "₹1,019",
         "price": "₹2,999",
         "disscount": "66% off",
         "size": ""
@@ -384,7 +384,7 @@ export const kurtaPage1=[
         "brand": "DACHIMA",
         "title": "Women Pure Cotton Printed Straight Kurta with Pant & Du...",
         "color": "",
-        "selling_price": "₹590",
+        "discountedPrice": "₹590",
         "price": "₹2,499",
         "disscount": "76% off",
         "size": ""
@@ -394,7 +394,7 @@ export const kurtaPage1=[
         "brand": "Janasya",
         "title": "Women Kurta and Palazzo Set Poly Silk",
         "color": "",
-        "selling_price": "₹879",
+        "discountedPrice": "₹879",
         "price": "₹2,199",
         "disscount": "60% off",
         "size": ""
