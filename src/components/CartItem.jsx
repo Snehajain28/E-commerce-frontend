@@ -9,7 +9,7 @@ function CartItem({ item }) {
 
        return (<div className='w-11/12 md:ml-10 mx-auto '>
               <div className='flex mt-9 gap-5 border-b mb-2 border-black' >
-                     <img className='h-[180px] object-contain w-[180px] mb-4' src={item.image}></img>
+                     <img className='h-[180px] object-contain w-[180px] mb-4' src={item.image} alt=''></img>
                      <div className=''>
                             <h1 className='font-semibold py-2'>{item.title}</h1>
                             <p className='text-gray-700 w-7/12'
