@@ -98,9 +98,8 @@ export default function ProductDetails() {
                             alt=''
                             className="h-full w-full object-center object-contain"
                         />
-
                     </div>
-                    <div className='flex flex-col  mx-auto '>
+                    <div className='flex flex-col ml-[-10rem] mx-auto '>
 
                         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:max-w-7xl  lg:px-8 lg:pb-24 lg:pt-16 ">
                             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
