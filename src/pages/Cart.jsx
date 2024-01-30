@@ -13,13 +13,11 @@ function Cart() {
         () => {
             let amt = 0;
 
-            cartData?.map((item) => {
+            cartData?.forEach(item=> {
                 let num = parseInt(item.price)
                 amt = amt + num
-
             })
             settoalamout(amt)
-
         }
     ), [cartData])
 

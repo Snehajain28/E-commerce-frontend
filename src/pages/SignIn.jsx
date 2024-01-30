@@ -52,7 +52,7 @@ export default  function SignIn() {
 <div className="relative flex flex-col justify-center min-h-11/12 w-7/12 md:w-4/12 md:py-[5%] py-[10%] mx-auto ">
             <div className="w-full p-6 m-auto bg-transparent rounded-md shadow-xl shadow-rose-600/40  lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase ">
-                    Sign UP
+                    SignUP
                 </h1>
                 <form onSubmit={handleSubmit}
                  className="mt-6">

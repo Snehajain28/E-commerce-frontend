@@ -7,18 +7,18 @@ export default function Card({ item }) {
     const navigate = useNavigate();
     const [click, setClick] = useState(false)
     const [{ user, cartData }, dispatch] = useStateValues();
-
+  
     useEffect((() => {
 
         if (cartData?.length > 0) {
             cartData.forEach(element => {
 
-                if (element.image == item.image) {
+                if (element.image === item.image) {
                     setClick(true)
                 }
             });
         }
-    }), [])
+    }), [cartData,item.image])
 
     const handleClick = () => {
 
@@ -42,11 +42,12 @@ export default function Card({ item }) {
             navigate('/login')
             return;
         }
-     
+
         if (!click) {
+
+            let arr = cartData;
             
-            let arr = cartData
-            arr.push(item)
+            arr?.push(item)
             dispatch({
                 type: "SET_CART_DATA",
                 cartData: arr,
@@ -54,7 +55,7 @@ export default function Card({ item }) {
 
         }
         else {
-           
+
             let i = cartData.indexOf(item)
             cartData.splice(i, 1)
 

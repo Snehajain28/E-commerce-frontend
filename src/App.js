@@ -13,9 +13,12 @@ import ProductForm from "./pages/ProductForm";
 import Cart from "./pages/Cart";
 
 function App() {
-  const [{user,token,cartData} ,dispatch] =useStateValues();
+  const [{abc} ,dispatch] =useStateValues();
 
- 
+  if(abc)
+  {
+  console.log(abc)
+  }
   useEffect( ( () => {
     const data = localStorage.getItem("user");
     let cart = localStorage.getItem("cart");
@@ -39,10 +42,17 @@ function App() {
         cartData:(cart),
        
     })
-    
+  }
+  else if (!cart)
+  {
+    dispatch({
+      type: "SET_CART_DATA",
+      cartData:[],
+     
+  })
   }
     }
-  ), [])
+  ), [dispatch])
 
 
   return (
