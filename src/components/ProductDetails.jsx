@@ -46,7 +46,7 @@ function classNames(...classes) {
 export default function ProductDetails() {
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
-    const [{ productDetails, count, user, cartData }, dispatch] = useStateValues();
+    const [{ productDetails,  user, cartData }, dispatch] = useStateValues();
     const [click, setClick] = useState(false)
     const navigate = useNavigate()
 
@@ -58,7 +58,7 @@ export default function ProductDetails() {
         }
         localStorage.setItem("cart", JSON.stringify(cartData));
       
-    }), [])
+    }), [cartData,productDetails])
 
     return (
         <div className="bg-white">
@@ -240,9 +240,9 @@ export default function ProductDetails() {
                                           navigate('/')
                                           return;
                                       }
-                                      let cnt;
+                                      
                                       if (!click) {
-                                          cnt = count + 1
+                                        
                                           let arr = cartData
                                           arr.push(productDetails)
                                           dispatch({
@@ -252,7 +252,7 @@ export default function ProductDetails() {
                               
                                       }
                                       else {
-                                          cnt = count - 1
+                                         
                                           let i = cartData.indexOf(productDetails)
                                           cartData.splice(i, 1)
                               

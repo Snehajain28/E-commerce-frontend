@@ -54,7 +54,11 @@ console.log(user)
 
     return (<div className=" w-[100vw] h-[100vh]">
 
+<<<<<<< HEAD
         <div className="flex justify-center mt-[-5rem] items-center">
+=======
+        <div className="flex justify-center items-center">
+>>>>>>> 74a18f4854260e4f044c867cd7cf45483bccf706
 
             <div className=" flex flex-col   w-11/12 md:w-[20rem]  m-auto ">
                 <div className="w-full p-6   mt-[10rem] m-auto bg-transparent rounded-md shadow-xl shadow-gray-800/40  lg:max-w-xl">
