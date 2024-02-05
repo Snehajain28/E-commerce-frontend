@@ -1,12 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
-import toast from "react-hot-toast";
+import Spinner from "../components/Spinner";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default  function SignIn() {
 
     const navigate = useNavigate();
+    const [spinner, setSpinner] = useState(false)
+
   
     const [formData, setformData] = useState({
         name: "",
@@ -24,7 +28,9 @@ export default  function SignIn() {
  }
   
   const handleSubmit = async(e)=> {
-   e.preventDefault();
+  
+    setSpinner(true);
+    e.preventDefault();
 
    const res = await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/register', {
     name:formData.name,
@@ -36,19 +42,21 @@ export default  function SignIn() {
   });
   
   if (res && res.data.success) {
-    toast.success(res.data && res.data.message);
+    toast.success("Sign Up Successfully");
     navigate("/login");
   }
   else {
     toast.error(res.data.message);
   }
+  setSpinner(false)
+
         
 }
 
 
     return ( <div className="signin ">
 
-<div className="relative flex flex-col justify-center min-h-11/12 w-7/12 md:w-4/12 md:py-[5%] py-[10%] mx-auto ">
+<div className="relative flex flex-col justify-center items-center min-h-11/12 w-[90vw] md:w-4/12 md:py-[5%] py-[10%] mx-auto ">
             <div className="w-full p-6 m-auto bg-transparent rounded-md shadow-xl shadow-gray-600/40  lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase ">
                     SignUP
@@ -137,9 +145,10 @@ export default  function SignIn() {
                         />
                     </div>
                     <div className="mt-6">
-                        <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
-                            Create User
-                        </button>
+                       
+                    <button className="w-full h-[3rem] px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-indigo-700 rounded-md hover:bg-indigo-600 focus:outline-none focus:bg-indigo-600">
+                                    {!spinner ? ("Create User") : (<Spinner className='h-[0.2rem] w-[0.2rem]' />)}
+                                </button>
                     </div>
                 </form>
 

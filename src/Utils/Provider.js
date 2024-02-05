@@ -3,32 +3,44 @@ import { createContext, useReducer, useContext } from 'react'
 export const ContextData = createContext();
 
 const initialState = {
- user:null,
  token:"",
  productDetails:null,
  cartData:[],
+ totalAmt:0,
+ user:null,
+ orders:[],
 }
 
 
 const reducers = (state, action) => {
 
   switch (action.type) {
-    case "SET_USER":
-      return {
-        ...state,
-        user: action.user,
-      };
+    
       case "SET_CART_DATA":
         return {
           ...state,
           cartData: action.cartData,
         };
+        case "SET_ORDERS":
+          return {
+            ...state,
+           orders: action.orders,
+          };
+        case "SET_USER":
+          return {
+            ...state,
+            user: action.user,
+          };
       case "SET_PRODUCT_DETAILS":
       return {
         ...state,
         productDetails:action.productDetails,
       };
-     
+      case "SET_TOTAL_AMOUNT":
+        return {
+          ...state,
+       totalAmt:action.totalAmt
+       };
       case "SET_TOKEN":
         return {
           ...state,

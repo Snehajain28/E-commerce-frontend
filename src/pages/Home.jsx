@@ -11,6 +11,7 @@ import { sareePage1 } from '../data/Saree/page1';
 import { lehngacholiPage2 } from '../data/Saree/lenghaCholiPage2';
 import { mensPantsPage1 } from '../data/pants/men_page1';
 import { dressPage1 } from '../data/dress/page1';
+import Search from '../components/Search';
 
 function Home() {
 
@@ -18,7 +19,8 @@ function Home() {
   return (
     <div>
       <Navbar/>
-      <div className='mt-[7.5rem]'>
+      <Search/>
+      <div className='mt-1'>
       <Carousel />
       <div className='space-y-10 py-10 flex flex-col justify-center px-5 lg:px-10'>
         <HomeCarousel sectionName={"Gouns"} CarouselData={gounsPage1} />

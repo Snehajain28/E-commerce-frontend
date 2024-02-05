@@ -6,7 +6,7 @@ export default function Card({ item }) {
 
     const navigate = useNavigate();
     const [click, setClick] = useState(false)
-    const [{ user, cartData }, dispatch] = useStateValues();
+    const [{ token, cartData }, dispatch] = useStateValues();
   
     useEffect((() => {
 
@@ -22,7 +22,7 @@ export default function Card({ item }) {
 
     const handleClick = () => {
 
-        if (user) {
+        if (token) {
             dispatch({
                 type: "SET_PRODUCT_DETAILS",
                 productDetails: item,
@@ -38,7 +38,7 @@ export default function Card({ item }) {
 
     const handleCart = () => {
         setClick(!click)
-        if (!user) {
+        if (!token) {
             navigate('/login')
             return;
         }

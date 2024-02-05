@@ -3,6 +3,7 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { RadioGroup } from '@headlessui/react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useStateValues } from '../Utils/Provider'
+import Navbar from './Navbar'
 
 const product = {
     breadcrumbs: [
@@ -62,6 +63,7 @@ export default function ProductDetails() {
 
     return (
         <div className="bg-white">
+            <Navbar/>
             <div className="pt-6">
                 <nav aria-label="Breadcrumb">
                     <ol className="mx-auto flex max-w-2xl items-center space-x-2 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -86,7 +88,7 @@ export default function ProductDetails() {
                         ))}
                         <li className="text-sm">
                             <p aria-current="page" className="font-medium text-gray-500 hover:text-gray-600">
-                                {((productDetails.title).substring(0, 10))}
+                                {((productDetails?.title)?.substring(0, 10))}
                             </p>
                         </li>
                     </ol>
@@ -94,7 +96,7 @@ export default function ProductDetails() {
                 <div className='flex flex-col  md:flex-row mx-auto '>
                     <div className="w-11/12  object-fit md:h-[40rem] md:w-[150rem]  md:ml-3 mx-auto mt-10 overflow-hidden rounded-lg lg:block">
                         <img
-                            src={productDetails.image}
+                            src={productDetails?.image}
                             alt=''
                             className="h-full w-full object-center object-contain"
                         />
@@ -103,14 +105,14 @@ export default function ProductDetails() {
 
                         <div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:max-w-7xl  lg:px-8 lg:pb-24 lg:pt-16 ">
                             <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-                                <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-3xl">{productDetails.title}</h1>
+                                <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-3xl">{productDetails?.title}</h1>
                             </div>
 
 
                             <div className="mt-4 lg:row-span-3 lg:my-7">
                                 <h2 className="sr-only">Product information</h2>
-                                <div className='flex justify-between w-10/12 mx-auto'> <p className="text-2xl tracking-tight text-gray-900">{productDetails.discountedPrice}</p>
-                                    <p className="text-2xl line-through tracking-tight text-gray-900">{productDetails.price}</p>
+                                <div className='flex justify-between w-10/12 mx-auto'> <p className="text-2xl tracking-tight text-gray-900">{productDetails?.discountedPrice}</p>
+                                    <p className="text-2xl line-through tracking-tight text-gray-900">{productDetails?.price}</p>
                                 </div>
                                 <div className="mt-6 lg:mt-10">
                                     <h3 className="sr-only">Reviews</h3>

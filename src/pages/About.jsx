@@ -1,27 +1,31 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Search from "../components/Search";
+import Footer from "../components/Footer";
 
 const About = () => {
+
   return (
-     <div className="row contactus ">
-        <div className="col-md-6 ">
-          <img
-            src="/images/about.jpeg"
-            alt="contactus"
-            style={{ width: "100%" }}
-          />
-        </div>
-        <div className="col-md-4">
-          <p className="text-justify mt-2">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus
-            officiis obcaecati esse tempore unde ratione, eveniet mollitia,
-            perferendis eius temporibus dicta blanditiis doloremque explicabo
-            quasi sunt vero optio cum aperiam vel consectetur! Laborum enim
-            accusantium atque, excepturi sapiente amet! Tenetur ducimus aut
-            commodi illum quidem neque tempora nam.
-          </p>
-        </div>
+    <div className="max-w-container mx-auto px-4">
+      <Navbar/>
+      <Search/>
+      <div className="pb-10">
+        <h1 className="max-w-[600px] text-base text-lightText mb-2">
+          <span className="text-primeColor font-semibold text-lg">Our Business</span>{" "}
+          is one of the world's leading ecommerce brands and is internationally
+          recognized for celebrating the essence of classic Worldwide cool
+          looking style.
+        </h1>
+        <Link to="/">
+          <button className="w-52 h-10 bg-red-600 text-white hover:bg-black duration-300">
+            Continue Shopping
+          </button>
+        </Link>
+        <Footer/>
       </div>
-    
+    </div>
   );
 };
+
 export default About;

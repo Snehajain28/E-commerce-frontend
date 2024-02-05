@@ -11,52 +11,74 @@ import { useEffect } from "react";
 import { useStateValues } from "./Utils/Provider";
 import ProductForm from "./pages/ProductForm";
 import Cart from "./pages/Cart";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Product from "./components/Product/Product";
+import Checkout from "./pages/Checkout";
+import UserProfile from "./pages/UserProfile";
+import UserOrders from "./pages/UserOrder";
 
 function App() {
-  const [{abc} ,dispatch] =useStateValues();
+  const [{ abc }, dispatch] = useStateValues();
 
-  if(abc)
-  {
-  console.log(abc)
+  if (abc) {
+    console.log(abc)
   }
-  useEffect( ( () => {
-    const data = localStorage.getItem("user");
+  useEffect((() => {
+    const data = localStorage.getItem("token");
     let cart = localStorage.getItem("cart");
-   if(data)
-    {
+
+    
+    if (data) {
+
+      dispatch({
+        type: "SET_TOKEN",
+        token: (JSON.parse(localStorage.token)),
+      });
+
       dispatch({
         type: "SET_USER",
-        user:(JSON.parse(data).user),
-    });
-
-    dispatch({
-        type: "SET_TOKEN",
-        token:(JSON.parse(data).token),
-    });
-
+        user: (JSON.parse(localStorage.user)),
+      });
+     
     }
-    if (cart){
-    cart=JSON.parse(localStorage.cart)
+    else {
+      dispatch({
+        type: "SET_USER",
+        user: null,
+      })
+    }
+
+    if (cart) {
+      cart = JSON.parse(localStorage.cart)
       dispatch({
         type: "SET_CART_DATA",
-        cartData:(cart),
-       
+        cartData: (cart),
+
+      })
+    }
+    else if (!cart) {
+      dispatch({
+        type: "SET_CART_DATA",
+        cartData: [],
+      })
+    }
+    dispatch({
+      type: "SET_TOTAL_AMOUNT",
+      totalAmt: 0,
+    })
+    dispatch({
+      type: "SET_ORDERS",
+     orders:[],
     })
   }
-  else if (!cart)
-  {
-    dispatch({
-      type: "SET_CART_DATA",
-      cartData:[],
-     
-  })
-  }
-    }
   ), [dispatch])
+
 
 
   return (
     <div className='overflow-x-hidden' >
+      <ToastContainer />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
@@ -65,12 +87,16 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/policy" element={<Policy />} />
-        <Route path="/product-form" element={<ProductForm/>} />
-        <Route path="/product-details" element={<ProductDetails/>} />
-        <Route path="/cart" element={<Cart/>} />
+        <Route path="/product-form" element={<ProductForm />} />
+        <Route path="/product-details" element={<ProductDetails />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/check-out" element={<Checkout />} />
+        <Route path="/orders" element={<UserOrders />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="*" element={<Pagenotfound />} />
-       
-
+      
+      
         {/*    <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
@@ -78,7 +104,8 @@ function App() {
         <Route path="/dashboard" element={<PrivateRoute />}>
           <Route path="user" element={<Dashboard />} />
           <Route path="user/orders" element={<Orders />} />
-          <Route path="user/profile" element={<Profile />} />
+            <Route path="user-profile" element={<UserProfile/>} />
+       
         </Route>
         <Route path="/dashboard" element={<AdminRoute />}>
           <Route path="admin" element={<AdminDashboard />} />
