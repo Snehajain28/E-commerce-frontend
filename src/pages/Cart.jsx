@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
 import { useStateValues } from "../Utils/Provider";
@@ -9,21 +9,22 @@ const Cart = () => {
 
   const [Amt, setAmt] = useState("");
   const [shippingCharge, setShippingCharge] = useState("");
-  const [{ cartData, totalAmt }, dispatch] = useStateValues();
+  const [{ cartData }, dispatch] = useStateValues();
 
-  function handleData() {
+
+  const handleData = useCallback(async () => {
     let price = 0;
     cartData?.map((item) => {
       price += item.price * item.quantity;
       return price;
     });
     setAmt(price);
-  }
+  }, [cartData]);
 
-  useEffect(() => {
+  useEffect((() => {
     handleData();
-  }, [cartData, totalAmt, handleData]);
-
+  }), [handleData])
+  
   useEffect(() => {
     if (Amt <= 200) {
       setShippingCharge(30);
@@ -37,7 +38,7 @@ const Cart = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-container h-[100vh] mx-auto px-4">
+      <div className="max-w-container h-[100vh] mt-[10rem] mx-auto px-4">
         {cartData?.length > 0 ? (
           <div className="pb-20">
             <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-5 place-content-center px-6 text-lg font-titleFont font-semibold">
@@ -47,7 +48,7 @@ const Cart = () => {
               <h2>Sub Total</h2>
             </div>
             <div className="mt-[5rem]">
-              {cartData.map((item,index) => (
+              {cartData.map((item, index) => (
                 <div key={index}>
                   <CartItem item={item} handleData={handleData} />
                 </div>

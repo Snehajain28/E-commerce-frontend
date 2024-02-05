@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { useStateValues } from "../Utils/Provider";
@@ -17,8 +17,7 @@ export default function Login() {
         email: "",
         password: "",
     })
-
-
+   
     const changeHandler = (e) => {
         setformData({
             ...formData,
@@ -30,16 +29,16 @@ export default function Login() {
     const handleSubmit = async (e) => {
         setSpinner(true);
         e.preventDefault();
-        await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/login', { email: formData.email, password: formData.password }
+        await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { email: formData.email, password: formData.password }
         ).then((response) => {
-           toast.success(response.data && response.data.message);
+            toast.success(response.data && response.data.message);
             dispatch({
                 type: "SET_TOKEN",
                 token: response.data.token,
             });
             dispatch({
                 type: "SET_USER",
-                user:response.data.user,
+                user: response.data.user,
             });
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -52,7 +51,7 @@ export default function Login() {
             })
         setSpinner(false)
     }
-    
+
     return (
         <div className='h-[100vh] w-[90vw] mx-auto '>
             <div className=" flex  md:w-[50vw] mx-auto mt-[5rem] flex-col justify-center items-center px-6 py-12 lg:px-8">
@@ -133,16 +132,16 @@ export default function Login() {
                     </div>
                     <div className="">
                         <GoogleLogin
-                          text="signin_with"
+                            text="signin_with"
                             onSuccess={credentialResponse => {
-                               toast("Login Successfully");
+                                toast("Login Successfully");
                                 dispatch({
                                     type: "SET_TOKEN",
                                     token: credentialResponse.credential,
                                 });
                                 localStorage.setItem("token", JSON.stringify(credentialResponse.credential))
                                 navigate('/');
-                                
+
                             }}
                             onError={() => {
                                 console.log('Login Failed');

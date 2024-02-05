@@ -7,7 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { Policy } from "@mui/icons-material";
 import Pagenotfound from "./pages/PageNotFound";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStateValues } from "./Utils/Provider";
 import ProductForm from "./pages/ProductForm";
 import Cart from "./pages/Cart";
@@ -17,18 +17,18 @@ import Product from "./components/Product/Product";
 import Checkout from "./pages/Checkout";
 import UserProfile from "./pages/UserProfile";
 import UserOrders from "./pages/UserOrder";
+import axios from "axios";
+import AdminHome from "./pages/Admin/AdminHome";
+
 
 function App() {
-  const [{ abc }, dispatch] = useStateValues();
+  const [{ token }, dispatch] = useStateValues();
+  let [admin, setAdmin] = useState(false)
 
-  if (abc) {
-    console.log(abc)
-  }
   useEffect((() => {
     const data = localStorage.getItem("token");
     let cart = localStorage.getItem("cart");
 
-    
     if (data) {
 
       dispatch({
@@ -40,7 +40,7 @@ function App() {
         type: "SET_USER",
         user: (JSON.parse(localStorage.user)),
       });
-     
+
     }
     else {
       dispatch({
@@ -69,35 +69,57 @@ function App() {
     })
     dispatch({
       type: "SET_ORDERS",
-     orders:[],
+      orders: [],
     })
   }
   ), [dispatch])
 
-
-
+  async function isAdmin() {
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/admin-auth`, { token: token }
+    ).then((response) => {
+     setAdmin(response.data.success)
+    })
+      .catch((e) => {
+        console.log(e)
+      })
+  }
+  if (token) {
+    isAdmin()
+  }
+  
   return (
     <div className='overflow-x-hidden' >
       <ToastContainer />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/signin' element={<SignIn />} />
-        <Route path='/product' element={<ProductDetails />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/policy" element={<Policy />} />
-        <Route path="/product-form" element={<ProductForm />} />
-        <Route path="/product-details" element={<ProductDetails />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/check-out" element={<Checkout />} />
-        <Route path="/orders" element={<UserOrders />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="*" element={<Pagenotfound />} />
-      
-      
-        {/*    <Route path="/product/:slug" element={<ProductDetails />} />
+
+      {admin ?
+        (<Routes>
+          <Route path='/' element={<AdminHome />} />
+
+        </Routes>
+        ) :
+        (
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signin' element={<SignIn />} />
+            <Route path='/product' element={<ProductDetails />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/policy" element={<Policy />} />
+            <Route path="/product-form" element={<ProductForm />} />
+            <Route path="/product-details" element={<ProductDetails />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/product" element={<Product />} />
+            <Route path="/check-out" element={<Checkout />} />
+            <Route path="/orders" element={<UserOrders />} />
+            <Route path="/profile" element={<UserProfile />} />
+            <Route path="*" element={<Pagenotfound />} />
+
+          </Routes>
+        )
+
+      }
+      {/*    <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
         <Route path="/search" element={<Search />} />
@@ -120,7 +142,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasssword />} />
         <Route path="/login" element={<Login />} />
      */}
-      </Routes>
+
     </div>
   );
 }

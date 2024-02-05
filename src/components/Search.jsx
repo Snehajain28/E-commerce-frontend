@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import toast from "react-hot-toast";
-import { FaSearch, FaUser, FaCaretDown, FaShoppingCart } from "react-icons/fa";
+import { FaSearch, FaUser, FaCaretDown } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { useStateValues } from "../Utils/Provider";
 
@@ -11,10 +11,10 @@ const Search = () => {
     const [show, setShow] = useState(false);
     const [showUser, setShowUser] = useState(false);
     const navigate = useNavigate();
-    const [{ cartData, token }, dispatch] = useStateValues();
+    const [{ token }, dispatch] = useStateValues();
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredProducts, setFilteredProducts] = useState([]);
-    const [showSearchBar, setShowSearchBar] = useState(false);
+    // const [filteredProducts, setFilteredProducts] = useState([]);
+    //  const [showSearchBar, setShowSearchBar] = useState(false);
 
     const handleSearch = (e) => {
         setSearchQuery(e.target.value);
@@ -99,7 +99,7 @@ const Search = () => {
                                 className={`w-full mx-auto  bg-white top-16 absolute left-0 z-50 overflow-y-scroll shadow-2xl scrollbar-hide cursor-pointer`}
                             >
                                 {searchQuery &&
-                                    filteredProducts.map((item) => (
+                                    searchQuery.map((item) => (
                                         <div
                                             onClick={() =>
                                                 navigate(
@@ -113,7 +113,6 @@ const Search = () => {
                                                         },
                                                     }
                                                 ) &
-                                                setShowSearchBar(true) &
                                                 setSearchQuery("")
                                             }
                                             key={item._id}

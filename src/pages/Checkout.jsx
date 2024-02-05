@@ -51,7 +51,7 @@ function Checkout() {
   const handleOrder = async (e) => {
     e.preventDefault();
     const newId = user._id;
-    await axios.post('http://localhost:5000/api/v1/user/create-order', { id: newId, cartData, addId: selectedAddress._id }
+    await axios.post('http://localhost:5000/api/v1/user/create-order', { id: newId, cartData, addId: selectedAddress._id ,totalAmt}
     ).then((response) => {
       getAddress();
       toast.success("Added Successfully");
@@ -70,12 +70,12 @@ function Checkout() {
     if (Address) {
       setSelectedAddress(Address[0])
     }
-  }, [user?.email]);
+  }, [user?.email,Address]);
 
   useEffect((() => {
     getAddress();
 
-  }), [])
+  }), [getAddress])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

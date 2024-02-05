@@ -5,7 +5,6 @@ import Spinner from "../components/Spinner";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 export default  function SignIn() {
 
     const navigate = useNavigate();
@@ -32,7 +31,7 @@ export default  function SignIn() {
     setSpinner(true);
     e.preventDefault();
 
-   const res = await axios.post('https://e-commerce-6zry.onrender.com/api/v1/user/register', {
+   const res = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/register`, {
     name:formData.name,
     email:formData.email,
     password:formData.password,
