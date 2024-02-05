@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useStateValues } from '../Utils/Provider';
 import { MdClose } from 'react-icons/md';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
@@ -7,40 +6,36 @@ import Navbar from '../components/Navbar';
 
 export default function UserProfile() {
 
-    const [{ user }, dispatch] = useStateValues();
+    const user = localStorage.getItem("user")
+
     const [selectedEditIndex, setSelectedEditIndex] = useState(-1);
     const [showAddAddressForm, setShowAddAddressForm] = useState(false);
     const [Address, setAddress] = useState([]);
 
-    const handleEdit = (addressUpdate, index) => {
-    };
+ 
     const handleRemove = (e, index) => {
     };
 
 
-
     const getAddress = useCallback(async () => {
-        await axios.post('http://localhost:5000/api/v1/user/checkout/address', { email: user.email }
+        await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/checkout/address`, { email: user.email }
         ).then((response) => {
             setAddress(response.data.allAddress)
 
         })
 
-    }, [user?.email]);
+    }, [user.email]);
 
     useEffect((() => {
         getAddress();
-        console.log(dispatch)
-
-    }), [])
+      
+    }), [getAddress])
 
     const handleEditForm = (index) => {
         setSelectedEditIndex(index);
     };
 
-    const handleAdd = (address) => {
-        setShowAddAddressForm(false);
-    };
+  
 
     return (
         <div>

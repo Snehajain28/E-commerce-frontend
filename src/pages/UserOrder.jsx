@@ -1,5 +1,4 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useStateValues } from '../Utils/Provider';
 import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom';
@@ -8,9 +7,11 @@ import axios from 'axios';
 
 export default function UserOrders() {
 
-  const [{ user }, dispatch] = useStateValues();
+ 
+  const user = localStorage.getItem("user")
+
+
   let [orders, setOrders] = useState([]);
-  let [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
 
@@ -19,11 +20,10 @@ export default function UserOrders() {
     await axios.post('http://localhost:5000/api/v1/user/orders', { id: user._id }
     ).then((response) => {
       setOrders(response.data.allOrders)
-      setItems(response.data.allItems)
-     
+   
     })
     setLoading(false)
-  }, [user?.email]);
+  }, [user._id]);
 
   useEffect((() => {
     getOrders();

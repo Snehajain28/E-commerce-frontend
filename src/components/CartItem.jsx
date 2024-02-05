@@ -12,10 +12,11 @@ const CardItem = ({ item , handleData }) => {
      useEffect( (() => {
        item.quantity = 1
   
-     }) ,[])
+     }) ,[item])
+
      useEffect( (() => {
       handleData ();
-    }) ,[quantity])
+    }) ,[quantity,handleData])
 
        return (
               <div className="w-full grid grid-cols-5 mb-4 border py-2">

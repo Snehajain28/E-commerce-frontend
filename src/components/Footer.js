@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaFacebook, FaYoutube, FaLinkedin, FaGithub } from "react-icons/fa";
 import { ImGit } from "react-icons/im";
 
