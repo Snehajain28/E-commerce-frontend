@@ -20,7 +20,7 @@ export default function SignIn() {
         password: "",
     })
 
-       const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+       const { coords } =
             useGeolocated({
                 positionOptions: {
                     enableHighAccuracy: false,
