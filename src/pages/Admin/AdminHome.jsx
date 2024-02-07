@@ -1,172 +1,172 @@
-import { useCallback, useEffect, useState } from "react";
-import axios from "axios";
-import Spinner from "../../components/Spinner";
-import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { BiCircle } from "react-icons/bi";
+
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 
 const AdminOrders = () => {
-  const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
+ 
+  const navigate = useNavigate();
+  const user = JSON.parse(localStorage.user)
+  const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+    });
+}
+const handleLogout = () => {
+  navigate("/");
+};
 
-  const token = localStorage.getItem("token")
-
-
-  const fetchOrders = useCallback(async () => {
-    try {
-      setLoading(true);
-      const response = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/all-orders`, { token: token });
-      if (response?.data?.data) {
-        setOrders(response.data.orders);
-      }
-    }
-    catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  }, [token]);
-
-
-  useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
-
+  
   return (
-    <>
+    <div className="px-[50px] py-[5px]">
+      <div className="flex text-[14px] mx-auto my-[40px] gap-6">
+        <div className="w-11/12">
+          <div className="flex flex-col gap-4 w-full">
+            <div className="flex gap-4 p-3 rounded-sm shadow-md">
+              <img
+                src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/profile-pic-male_4811a1.svg"
+                alt="g"
+              />
 
-      <main className="w-full px-4 sm:px-10 py-4 ">
-
-        <div className="flex gap-3.5 w-full ">
-          {loading ? (
-            <Spinner />
-          ) : (
-            <div className="flex flex-col gap-3 w-full pb-5 overflow-hidden">
-              <form className="flex items-center justify-between mx-auto w-[100%] sm:w-10/12 bg-white border rounded mb-2 hover:shadow-md"
-              >
-                <input
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  type="search"
-                  name="search"
-                  placeholder="Search your orders here"
-                  className="p-2 text-sm outline-none flex-1 rounded-l "
-                />
-                <button
-                  type="submit"
-                  className="h-full text-sm px-1 sm:px-4 py-2.5 text-white bg-primaryBlue hover:bg-blue-600 rounded-r flex items-center gap-1"
-                >
-                  <FaSearch sx={{ fontSize: "20px" }} />
-                  <p className="text-[10px] sm:text-[14px]">
-                    Search
-                  </p>
-                </button>
-              </form>
-              {orders?.length === 0 && (
-                <div className="flex items-center flex-col gap-2 p-10 bg-white rounded-sm ">
-                  <img
-                    src="https://rukminim1.flixcart.com/www/100/100/promos/23/08/2020/c5f14d2a-2431-4a36-b6cb-8b5b5e283d4f.png"
-                    alt=""
-                  />
-                  <span className="text-lg font-medium">
-                    Sorry, no orders found
-                  </span>
-                  <p>Get some orders first</p>
+              <div className="flex flex-col justify-center p-1">
+                <div className="text-[14px]">Hello,</div>
+                <div className="font-[600] text-[16px] ">
+                  {user?.name}
                 </div>
-              )}
-              {orders
-                ?.map((order) => {
-                  return order.items.map((item, index) => (
-                    <Link
-                      to={`./order_details/${item._id}`}
-                      className="flex flex-col sm:flex-row items-start bg-white border rounded gap-5 px-4 sm:px-8 py-5 hover:shadow-lg mx-2 sm:mx-10"
-                    >
-                      <div className="w-full sm:w-32 h-20">
-                        <img
-                          draggable="false"
-                          className="h-full w-full object-contain"
-                          src={item?.image}
-                          alt=''
-                        />
-                      </div>
-                      <div className="flex flex-col sm:flex-row justify-between w-full">
-                        <div className="flex flex-col w-[300px] gap-1 overflow-hidden">
-                          <p className="text-sm">
-                            {item?.name.length > 40
-                              ? `${item?.name.substring(0, 40)}...`
-                              : item?.name}
-                          </p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            Quantity: {item?.quantity}
-                          </p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row mt-1 sm:mt-0 gap-2 sm:gap-20 sm:w-1/2">
-                          <p className="text-sm w-[100px]">
-                            ₹{item?.discountPrice.toLocaleString()}
-                          </p>
-
-                          <div className="flex flex-col gap-2">
-                            <p className="text-sm font-medium flex items-center gap-1 w-[250px]">
-                              {order.orderStatus === "Shipped" ? (
-                                <>
-                                  <span className="text-orange pb-0.5">
-                                    <BiCircle sx={{ fontSize: "14px" }} />
-                                  </span>
-                                  Shipped
-                                </>
-                              ) : order.orderStatus === "Delivered" ? (
-                                <>
-                                  <span className="text-primaryGreen pb-0.5">
-                                    <BiCircle sx={{ fontSize: "14px" }} />
-                                  </span>
-                                  Delivered
-                                </>
-                              ) : order.orderStatus === "Out For Delivery" ? (
-                                <>
-                                  <span className="text-primaryGreen pb-0.5">
-                                    <BiCircle sx={{ fontSize: "14px" }} />
-                                  </span>
-                                  Out For Delivery
-                                </>
-                              ) : (
-                                <>
-                                  <span className="text-primaryBlue pb-0.5">
-                                    <BiCircle sx={{ fontSize: "14px" }} />
-                                  </span>
-                                  Order received on {"h"}
-                                </>
-                              )}
-                            </p>
-                            {order.orderStatus === "Delivered" ? (
-                              <p className="text-xs ml-1">
-                                Item successfully delivered
-                              </p>
-                            ) : order.orderStatus === "Out For Delivery" ? (
-                              <p className="text-xs ml-1">
-                                Product is out for delivery
-                              </p>
-                            ) : order.orderStatus === "Shipped" ? (
-                              <p className="text-xs ml-1">
-                                You have processed this order
-                              </p>
-                            ) : (
-                              <p className="text-xs ml-1">Order received</p>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-                  ));
-                })
-              }
+              </div>
             </div>
-          )}
-        </div>
 
-      </main>
-    </>
+            <div className="bg-white flex flex-col justify-center rounded-sm shadow-md">
+              <div className="flex flex-col justify-center border-b-[1px]">
+                <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
+                  <div className="text-primaryBlue text-[16px]" />
+                  <div className="font-[600] text-[14px] text-slate-500">
+                    ACCOUNT SETTINGS
+                  </div>
+                </div>
+                <div className="flex flex-col  text-black font-[300] text-[14px] mb-2 mt-0 ">
+                  <NavLink
+                    to="./profile"
+                    onClick={scrollToTop}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
+                        : ""
+                    }
+                  >
+                    <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                      Profile Information
+                    </div>
+                  </NavLink>
+
+                  <NavLink
+                    to="./address"
+                    onClick={scrollToTop}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
+                        : ""
+                    }
+                  >
+                    <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                      Manage Addresses
+                    </div>
+                  </NavLink>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-center border-b-[1px]">
+                <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px]">
+                  <div className="text-primaryBlue text-[16px]" />
+                  <div className="font-[600] text-[14px] text-slate-500">
+                    DASHBOARD
+                  </div>
+                </div>
+                <div className="flex flex-col  text-black font-[300] text-[14px] mb-2 mt-0 ">
+                  <NavLink
+                    to="/orders_details "
+                    onClick={scrollToTop}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
+                        : ""
+                    }
+                  >
+                    <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                      Orders
+                    </div>
+                  </NavLink>
+
+                  <NavLink
+                    to="./all-products"
+                    onClick={scrollToTop}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
+                        : ""
+                    }
+                  >
+                    <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                      Products
+                    </div>
+                  </NavLink>
+
+                  <NavLink
+                    to="./product/add-product"
+                    onClick={scrollToTop}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
+                        : ""
+                    }
+                  >
+                    <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                      Add Product
+                    </div>
+                  </NavLink>
+
+                  <NavLink
+                    to="./users"
+                    onClick={scrollToTop}
+                    className={({ isActive }) =>
+                      isActive
+                        ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
+                        : ""
+                    }
+                  >
+                    <div className=" h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
+                      Users
+                    </div>
+                  </NavLink>
+                </div>
+              </div>
+
+              <div className="flex flex-col justify-center border-b-[1px]">
+                <div className="flex flex-row items-center gap-6 pl-[10px] py-[8px] group">
+                  <div className="text-primaryBlue text-[16px]" />
+                  <button
+                    className="font-[600] text-[14px] w-full h-[40px] flex items-center text-slate-500 group-hover:text-primaryBlue"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </div>
+              <div className="flex flex-col items-start gap-2 p-4 bg-white rounded-sm shadow">
+                <span className="text-xs font-medium">
+                  Frequently Visited:
+                </span>
+                <div className="flex gap-2.5 text-xs text-gray-500">
+                  <Link to="/forgot-password">Change Password</Link>
+                  <Link to="/admin/orders">Track Order</Link>
+                  <Link to="/">Help Center</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </div>
   );
 };
 

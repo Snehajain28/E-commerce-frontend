@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import { GoogleLogin } from '@react-oauth/google';
 
 
+
 export default function Login() {
 
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function Login() {
         email: "",
         password: "",
     })
-   
+
     const changeHandler = (e) => {
         setformData({
             ...formData,
@@ -54,9 +55,8 @@ export default function Login() {
 
     return (
         <div className='h-[100vh] w-[90vw] mx-auto '>
-            <div className=" flex  md:w-[50vw] mx-auto mt-[5rem] flex-col justify-center items-center px-6 py-12 lg:px-8">
+            <div className=" flex xl:w-[20vw] md:w-[50vw] mx-auto mt-[5rem] flex-col justify-center items-center px-6 py-12 lg:px-8">
                 <div className="">
-
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         Log in to your account
                     </h2>
@@ -161,5 +161,5 @@ export default function Login() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

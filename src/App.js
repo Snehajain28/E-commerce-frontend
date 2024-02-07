@@ -9,7 +9,6 @@ import { Policy } from "@mui/icons-material";
 import Pagenotfound from "./pages/PageNotFound";
 import { useEffect, useState } from "react";
 import { useStateValues } from "./Utils/Provider";
-import ProductForm from "./pages/ProductForm";
 import Cart from "./pages/Cart";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,6 +18,10 @@ import UserProfile from "./pages/UserProfile";
 import UserOrders from "./pages/UserOrder";
 import axios from "axios";
 import AdminHome from "./pages/Admin/AdminHome";
+import CreateProduct from "./pages/Admin/CreateProduct";
+import OrderDetails from "./pages/Admin/OrderDetails";
+import Order from "./pages/Admin/Order";
+import AllProducts from "./pages/Admin/allProduct";
 
 
 function App() {
@@ -77,7 +80,7 @@ function App() {
   async function isAdmin() {
     await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/admin-auth`, { token: token }
     ).then((response) => {
-     setAdmin(response.data.success)
+      setAdmin(response.data.success)
     })
       .catch((e) => {
         console.log(e)
@@ -86,39 +89,42 @@ function App() {
   if (token) {
     isAdmin()
   }
-  
+
+
   return (
     <div className='overflow-x-hidden' >
       <ToastContainer />
 
-      {admin ?
-        (<Routes>
+      {admin &&
+        <Routes>
           <Route path='/' element={<AdminHome />} />
+          <Route path='/product/add-product' element={<CreateProduct />} />
+          <Route path='/orders_details' element={<OrderDetails />} />
+          <Route path='/orders_details/:id' element={<Order/>} />
+          <Route path='/all-products' element={<AllProducts/>} />
+         
+        </Routes>
+       }
+      {!admin &&
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/signin' element={<SignIn />} />
+          <Route path='/product' element={<ProductDetails />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/policy" element={<Policy />} />
+          <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/check-out" element={<Checkout />} />
+          <Route path="/orders" element={<UserOrders />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="*" element={<Pagenotfound />} />
 
         </Routes>
-        ) :
-        (
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/signin' element={<SignIn />} />
-            <Route path='/product' element={<ProductDetails />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/policy" element={<Policy />} />
-            <Route path="/product-form" element={<ProductForm />} />
-            <Route path="/product-details" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="/check-out" element={<Checkout />} />
-            <Route path="/orders" element={<UserOrders />} />
-            <Route path="/profile" element={<UserProfile />} />
-            <Route path="*" element={<Pagenotfound />} />
-
-          </Routes>
-        )
-
       }
+
       {/*    <Route path="/product/:slug" element={<ProductDetails />} />
         <Route path="/categories" element={<Categories />} />
         <Route path="/category/:slug" element={<CategoryProduct />} />
