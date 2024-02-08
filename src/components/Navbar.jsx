@@ -45,7 +45,7 @@ export default function Navbar() {
   return (
 
     <div
-      className="w-full  h-[68px] fixed bg-white top-0 z-50 border-b-[1px] border-b-gray-200 ">
+      className="w-full  h-[60px] fixed bg-white top-0 z-50 border-b-[1px] border-b-gray-200 ">
       <nav className="h-full px-4  mx-auto relative">
         <div className="flex items-center justify-between h-full">
           <Link to="/">

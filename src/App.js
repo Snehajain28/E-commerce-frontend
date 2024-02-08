@@ -7,7 +7,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import { Policy } from "@mui/icons-material";
 import Pagenotfound from "./pages/PageNotFound";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useStateValues } from "./Utils/Provider";
 import Cart from "./pages/Cart";
 import { ToastContainer } from 'react-toastify';
@@ -16,22 +16,22 @@ import Product from "./components/Product/Product";
 import Checkout from "./pages/Checkout";
 import UserProfile from "./pages/UserProfile";
 import UserOrders from "./pages/UserOrder";
-import axios from "axios";
 import AdminHome from "./pages/Admin/AdminHome";
 import CreateProduct from "./pages/Admin/CreateProduct";
 import OrderDetails from "./pages/Admin/OrderDetails";
 import Order from "./pages/Admin/Order";
 import AllProducts from "./pages/Admin/allProduct";
+import UserDetails from "./pages/Admin/UserDetails";
+import EditProduct from "./pages/Admin/EditProduct";
+import OrderSuccess from "./pages/OrderSuccess";
 
 
 function App() {
-  const [{ token }, dispatch] = useStateValues();
-  let [admin, setAdmin] = useState(false)
-
+  const [{ role }, dispatch] = useStateValues();
+  
   useEffect((() => {
     const data = localStorage.getItem("token");
     let cart = localStorage.getItem("cart");
-
     if (data) {
 
       dispatch({
@@ -71,41 +71,28 @@ function App() {
       totalAmt: 0,
     })
     dispatch({
-      type: "SET_ORDERS",
-      orders: [],
+      type: "SET_ROLE",
+      role: "user",
     })
   }
   ), [dispatch])
-
-  async function isAdmin() {
-    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/admin-auth`, { token: token }
-    ).then((response) => {
-      setAdmin(response.data.success)
-    })
-      .catch((e) => {
-        console.log(e)
-      })
-  }
-  if (token) {
-    isAdmin()
-  }
-
 
   return (
     <div className='overflow-x-hidden' >
       <ToastContainer />
 
-      {admin &&
+      { role === "admin" &&
         <Routes>
           <Route path='/' element={<AdminHome />} />
           <Route path='/product/add-product' element={<CreateProduct />} />
           <Route path='/orders_details' element={<OrderDetails />} />
-          <Route path='/orders_details/:id' element={<Order/>} />
-          <Route path='/all-products' element={<AllProducts/>} />
-         
+          <Route path='/orders_details/:id' element={<Order />} />
+          <Route path='/all-products' element={<AllProducts />} />
+          <Route path='/users' element={<UserDetails />} />
+          <Route path='/edit-product/:id' element={<EditProduct />} />
         </Routes>
-       }
-      {!admin &&
+      }
+      { role === "user" &&
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -120,8 +107,8 @@ function App() {
           <Route path="/check-out" element={<Checkout />} />
           <Route path="/orders" element={<UserOrders />} />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/orders/:id" element={<OrderSuccess />} />
           <Route path="*" element={<Pagenotfound />} />
-
         </Routes>
       }
 

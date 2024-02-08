@@ -8,19 +8,17 @@ import axios from 'axios';
 export default function UserOrders() {
 
  
-  const user = localStorage.getItem("user")
-
-
+  const user = JSON.parse(localStorage.getItem("user"))
   let [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
 
   const getOrders = useCallback(async () => {
     setLoading(true)
-    await axios.post('http://localhost:5000/api/v1/user/orders', { id: user._id }
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/orders`,{ id: user._id }
     ).then((response) => {
       setOrders(response.data.allOrders)
-   
+      console.log(response)
     })
     setLoading(false)
   }, [user._id]);

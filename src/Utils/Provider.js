@@ -8,7 +8,7 @@ const initialState = {
  cartData:[],
  totalAmt:0,
  user:null,
- orders:[],
+ role:"user",
 }
 
 
@@ -21,21 +21,23 @@ const reducers = (state, action) => {
           ...state,
           cartData: action.cartData,
         };
-        case "SET_ORDERS":
-          return {
-            ...state,
-           orders: action.orders,
-          };
+       
         case "SET_USER":
           return {
             ...state,
             user: action.user,
           };
+          case "SET_ROLE":
+            return {
+              ...state,
+             role: action.role,
+            };
       case "SET_PRODUCT_DETAILS":
       return {
         ...state,
         productDetails:action.productDetails,
       };
+
       case "SET_TOTAL_AMOUNT":
         return {
           ...state,

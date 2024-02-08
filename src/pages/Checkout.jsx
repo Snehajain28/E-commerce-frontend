@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import axios from "axios";
 import { useStateValues } from "../Utils/Provider";
@@ -12,9 +12,8 @@ function Checkout() {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [Address, setAddress] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const [{ user, cartData, totalAmt }, dispatch] = useStateValues();
-
-  console.log(dispatch)
+  const [{ user, cartData, totalAmt}, dispatch] = useStateValues();
+  const navigate = useNavigate();
 
   const [formData, setformData] = useState({
     email: "",
@@ -29,8 +28,6 @@ function Checkout() {
   const handleQuantity = (e, item) => {
 
   };
-
-
 
   const handleRemove = (e, id) => {
   };
@@ -51,13 +48,16 @@ function Checkout() {
   const handleOrder = async (e) => {
     e.preventDefault();
     const newId = user._id;
-    await axios.post('http://localhost:5000/api/v1/user/create-order', { id: newId, cartData, addId: selectedAddress._id ,totalAmt}
+    await axios.post('http://localhost:5000/api/v1/user/create-order', { id: newId, cartData, addId: selectedAddress._id, totalAmt }
     ).then((response) => {
-      getAddress();
-      toast.success("Added Successfully");
+      dispatch({
+        type: "SET_ORDER",
+        order: response.data.newOrder,
+      });
+      navigate(`/orders/${response.data.newOrder._id}`)
     })
     setformData({ email: "", city: "", name: "", address: "", zip: "", phone: "", state: "" });
-   
+    
   };
 
 
@@ -70,7 +70,7 @@ function Checkout() {
     if (Address) {
       setSelectedAddress(Address[0])
     }
-  }, [user?.email,Address]);
+  }, [user?.email, Address]);
 
   useEffect((() => {
     getAddress();
@@ -452,9 +452,9 @@ function Checkout() {
                 <p className="mt-1 text-sm text-gray-500">
                   Shipping and taxes calculated at checkout.
                 </p>
-                <div  className="mt-6">
-                    <div className="flex cursor-pointer z-10 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-                      onClick={handleOrder}>Order Now  </div>
+                <div className="mt-6">
+                  <div className="flex cursor-pointer z-10 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    onClick={handleOrder}>Order Now  </div>
                 </div>
                 <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                   <p>

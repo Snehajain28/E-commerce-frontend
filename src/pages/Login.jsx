@@ -41,6 +41,13 @@ export default function Login() {
                 type: "SET_USER",
                 user: response.data.user,
             });
+            if(response.data.user.role === 1)
+            {
+            dispatch({
+                type: "SET_ROLE",
+                role:"admin",
+              })
+            }
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.user));
 

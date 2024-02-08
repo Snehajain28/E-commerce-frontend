@@ -85,7 +85,7 @@ const AllProducts = () => {
                     <td className="border-2">{item.quantity}</td>
                     <td className="flex  justify-center gap-2 mt-[5%] items-center text-lg">
                       <td className=" cursor-pointer hover:scale-110 duration-100">
-                        <VscEdit onClick={() => nav("/product/" + item._id)} />
+                        <VscEdit onClick={() => nav("/edit-product/" + item._id)} />
                       </td>
                       <td className=" cursor-pointer hover:scale-110 duration-100">
                         <VscTrash onClick={() => updateDeletedProduct(item._id)} />

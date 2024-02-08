@@ -19,9 +19,9 @@ function Home() {
   return (
     <div>
       <Navbar/>
-      <Search/>
+       <Carousel />
+     <Search/>
       <div className='mt-1'>
-      <Carousel />
       <div className='space-y-10 py-10 flex flex-col justify-center px-5 lg:px-10'>
         <HomeCarousel sectionName={"Gouns"} CarouselData={gounsPage1} />
         <HomeCarousel sectionName={"Kurtas"} CarouselData={kurtaPage1} />
