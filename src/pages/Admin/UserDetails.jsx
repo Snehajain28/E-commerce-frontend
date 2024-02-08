@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { Link } from 'react-router-dom'
 
 const UserDetails = () => {
-
-    const [openSidebar, setOpenSidebar] = useState(false)
-    const navigate = useNavigate()
 
     useEffect(() => {
 
@@ -24,7 +21,7 @@ const UserDetails = () => {
                             <a href className="flex flex-row items-center">
                                 <img
                                     src={`https://avatars.dicebear.com/api/initials/userInfo.name.svg`}
-                                    alt
+                                    alt=''
                                     className="h-10 w-10 bg-gray-200 border rounded-full"
                                 />
                                 <span className="flex flex-col ml-2">
@@ -110,9 +107,9 @@ const UserDetails = () => {
                                                         <Link to={`/admin/user/${user._id}/edit`} className="text-indigo-600 hover:text-indigo-900">
                                                             Edit
                                                         </Link>
-                                                        <a href="#" className="text-red-600 hover:text-red-900" onClick={() => deleteHandler(user._id)}>
+                                                        <Link className="text-red-600 hover:text-red-900" onClick={() => deleteHandler(user._id)}>
                                                             Delete
-                                                        </a>
+                                                        </Link>
 
                                                     </td>
                                                 </tr>

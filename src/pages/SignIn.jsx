@@ -35,7 +35,7 @@ export default function SignIn() {
         });
 
     }
-
+console.log(coords)
     const handleSubmit = async (e) => {
         setSpinner(true);
         e.preventDefault();

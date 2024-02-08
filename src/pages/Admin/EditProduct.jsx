@@ -1,11 +1,7 @@
 import TextField from "@mui/material/TextField";
-import { useState, useEffect } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
 import { toast } from "react-toastify";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import ImageIcon from "@mui/icons-material/Image";
-import Spinner from "../../components/Spinner";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import FormData from "form-data";
 
