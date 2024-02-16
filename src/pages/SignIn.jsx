@@ -6,16 +6,22 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { passwordStrength } from 'check-password-strength'
 import { useGeolocated } from "react-geolocated";
+import { TbEyeClosed } from "react-icons/tb";
+import { FaEye } from "react-icons/fa";
+
+
 
 export default function SignIn() {
 
     const navigate = useNavigate();
     const [spinner, setSpinner] = useState(false)
+    const [show, setShow] = useState(false)
+    const [cshow, setCShow] = useState(false)
 
     const [formData, setformData] = useState({
         name: "",
         email: "",
-        location: "",
+        cnfrm: "",
         phoneNumber: "",
         password: "",
     })
@@ -35,7 +41,7 @@ export default function SignIn() {
         });
 
     }
-console.log(coords)
+    console.log(coords)
     const handleSubmit = async (e) => {
         setSpinner(true);
         e.preventDefault();
@@ -46,6 +52,19 @@ console.log(coords)
             setSpinner(false)
             return;
         }
+        if(formData.password !== formData.cnfrm)
+        {
+            toast.error("Password doesn't match");
+            setSpinner(false)
+            return;
+        }
+        if(formData?.phoneNumber?.length < 10 || formData?.phoneNumber?.length >10)
+        {
+            toast.error("Invalid Phone");
+            setSpinner(false)
+            return;
+        }
+        console.log(formData)
         const res = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/register`, {
             name: formData.name,
             email: formData.email,
@@ -66,10 +85,10 @@ console.log(coords)
     }
 
 
-    return (<div className="overflow-x-hidden ">
+    return (<div className="overflow-x-hidden h-[100vh] ">
 
-        <div className="relative flex flex-col justify-center items-center min-h-11/12 w-[90vw] md:w-4/12 md:py-[5%] py-[10%] mx-auto ">
-            <div className="w-full p-6 m-auto bg-transparent rounded-md shadow-xl shadow-gray-600/40  lg:max-w-xl">
+        <div className="relative flex flex-col justify-center items-center xs:w-[60vw] w-[90vw] md:w-4/12 md:py-[5%]  mx-auto ">
+            <div className="w-full p-6 bg-transparent rounded-md shadow-xl shadow-gray-600/40  lg:max-w-xl">
                 <h1 className="text-3xl font-semibold text-center text-indigo-700 underline uppercase ">
                     SignUP
                 </h1>
@@ -108,22 +127,7 @@ console.log(coords)
                             className="block w-full px-4 py-2 mt-2 text-indigo-700  border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                     </div>
-                    <div className="mb-2">
-                        <label
-                            htmlFor="location"
-                            className="block text-sm font-semibold text-gray-800"
-                        >
-                            Location
-                        </label>
-                        <input
-                            type="text"
-                            placeholder="location"
-                            value={formData.location}
-                            onChange={changeHandler}
-                            name="location"
-                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        />
-                    </div>
+
                     <div className="mb-2">
                         <label
 
@@ -132,7 +136,7 @@ console.log(coords)
                             Phone
                         </label>
                         <input
-                            type="phoneNumber"
+                            type="number"
                             placeholder="Phone"
                             value={formData.phoneNumber}
                             onChange={changeHandler}
@@ -148,13 +152,36 @@ console.log(coords)
                             Password
                         </label>
                         <input
-                            type="password"
+                            type={show ? "text" : "password"}
                             placeholder="password"
                             value={formData.password}
                             onChange={changeHandler}
                             name="password"
                             className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
+                        <div className='mt-[-1.7rem] xs:ml-[45vw] lg:ml-[22vw]  ml-[64vw]' onClick={() => { setShow(!show) }}>
+                            {show ? <TbEyeClosed size={20} /> : <FaEye size={20} />}
+                        </div>
+                    </div>
+                    <div className="mb-2">
+                        <label
+                            htmlFor="cnfrm"
+                            className="block text-sm font-semibold text-gray-800"
+                        >
+                            Confirm Password
+                        </label>
+                        <input
+                            type={cshow ? "text" : "password"}
+                            placeholder="Confirm"
+                            value={formData.cnfrm}
+                            onChange={changeHandler}
+                            name="cnfrm"
+                            className="block w-full px-4 py-2 mt-2 text-indigo-700 bg-white border rounded-md focus:border-indigo-400 focus:ring-indigo-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                        <div className='mt-[-1.7rem] xs:ml-[45vw] lg:ml-[22vw]  ml-[64vw]' onClick={() => { setCShow(!cshow) }}>
+                            {cshow ? <TbEyeClosed size={20} /> : <FaEye size={20} />}
+                        </div>
+
                     </div>
                     <div className="mt-6">
 
@@ -163,7 +190,12 @@ console.log(coords)
                         </button>
                     </div>
                 </form>
-
+                <div className="flex gap-2 items-center text-gray-400 text-[1rem] my-5">
+                    <hr className="w-[10rem] h-[2px] bg-gray-300" />
+                    or
+                    <hr className="w-[10rem] h-[2px] bg-gray-300" />
+                </div>
+               
                 <p className="mt-8 text-[13px] font-semibold text-center text-gray-700">
                     {" "}
                     Already have an account?{" "}

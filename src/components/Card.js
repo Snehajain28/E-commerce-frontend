@@ -83,8 +83,8 @@ export default function Card({ item }) {
 
                 </div>
                 <div className='flex justify-between mx-auto w-10/12'>
-                    <p className='text-green-400'>{item.discountedPrice}</p>
-                    <p className='line-through'>{item.price}</p>
+                    <p className='text-green-400'>₹{item.discountedPrice}</p>
+                    <p className='line-through'>₹{item.price}</p>
 
                 </div>
             </div>

@@ -33,6 +33,8 @@ const Search = () => {
                 });
                 localStorage.removeItem("token");
                 localStorage.removeItem("cartData");
+                localStorage.removeItem("user");
+
             }
             toast.success("Sign Out Successfully");
         } catch (error) {
@@ -52,7 +54,7 @@ const Search = () => {
     return (
         <div className="w-full lg:w-9/12 mx-auto bg-[#F5F5F3] relative">
             <div className="max-w-container mx-auto">
-                <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-24">
+                <div className="flex flex-col mt-3 rounded-lg lg:flex-row items-start lg:items-center justify-between w-full px-4 pb-4 lg:pb-0 h-full lg:h-15">
                     <div
                         onClick={() => setShow(!show)}
                         className="flex h-14 cursor-pointer items-center gap-2 text-primeColor"

@@ -22,7 +22,7 @@ function Home() {
        <Carousel />
      <Search/>
       <div className='mt-1'>
-      <div className='space-y-10 py-10 flex flex-col justify-center px-5 lg:px-10'>
+      <div className='space-y-10 py-5 flex flex-col justify-center px-5 lg:px-10'>
         <HomeCarousel sectionName={"Gouns"} CarouselData={gounsPage1} />
         <HomeCarousel sectionName={"Kurtas"} CarouselData={kurtaPage1} />
         <HomeCarousel sectionName={"Lehnga"} CarouselData={lehngacholiPage2} />

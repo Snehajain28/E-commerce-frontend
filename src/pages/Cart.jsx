@@ -38,7 +38,7 @@ const Cart = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-container h-[100vh] mt-[10rem] mx-auto px-4">
+      <div className="max-w-container h-[100vh] mt-[4.5rem] mx-auto px-4">
         {cartData?.length > 0 ? (
           <div className="pb-20">
             <div className="w-full h-20 bg-[#F5F7F7] text-primeColor hidden lgl:grid grid-cols-5 place-content-center px-6 text-lg font-titleFont font-semibold">

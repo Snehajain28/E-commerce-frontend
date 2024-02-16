@@ -6,6 +6,8 @@ import axios from "axios";
 import { useStateValues } from "../Utils/Provider";
 import Spinner from "../components/Spinner";
 import { GoogleLogin } from '@react-oauth/google';
+import { TbEyeClosed } from "react-icons/tb";
+import { FaEye } from "react-icons/fa";
 
 
 
@@ -13,6 +15,7 @@ export default function Login() {
 
     const navigate = useNavigate();
     const [spinner, setSpinner] = useState(false)
+    const [show, setShow] = useState(false)
     const [{ user }, dispatch] = useStateValues();
     const [formData, setformData] = useState({
         email: "",
@@ -32,7 +35,8 @@ export default function Login() {
         e.preventDefault();
         await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { email: formData.email, password: formData.password }
         ).then((response) => {
-            toast.success(response.data && response.data.message);
+
+            toast.success(response.data.message);
             dispatch({
                 type: "SET_TOKEN",
                 token: response.data.token,
@@ -41,12 +45,11 @@ export default function Login() {
                 type: "SET_USER",
                 user: response.data.user,
             });
-            if(response.data.user.role === 1)
-            {
-            dispatch({
-                type: "SET_ROLE",
-                role:"admin",
-              })
+            if (response.data.user.role === 1) {
+                dispatch({
+                    type: "SET_ROLE",
+                    role: "admin",
+                })
             }
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -55,16 +58,16 @@ export default function Login() {
             console.log(user)
         })
             .catch((e) => {
-                console.log(e)
+                toast.error(e.response.data.message);
             })
         setSpinner(false)
     }
 
     return (
-        <div className='h-[100vh] w-[90vw] mx-auto '>
-            <div className=" flex xl:w-[20vw] md:w-[50vw] mx-auto mt-[5rem] flex-col justify-center items-center px-6 py-12 lg:px-8">
+        <div className='h-[100vh]  '>
+            <div className=" flex xl:w-[20vw] w-[90vw]  xs:w-[60vw] md:w-[40vw] lg:w-[30vw] mx-auto  flex-col justify-center items-center px-6 py-12 lg:px-8">
                 <div className="">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                    <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         Log in to your account
                     </h2>
                 </div>
@@ -119,9 +122,12 @@ export default function Login() {
                                     onChange={changeHandler}
                                     name="password"
                                     required
-                                    type="password"
+                                    type={show ? "text" : "password"}
                                     className="block w-full  px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
+                                <div className='mt-[-1.7rem] xs:ml-[45vw] lg:ml-[22vw]  ml-[64vw]' onClick={() => { setShow(!show) }}>
+                                    {show ? <TbEyeClosed size={20} /> : <FaEye size={20} />}
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -140,16 +146,37 @@ export default function Login() {
                     <div className="">
                         <GoogleLogin
                             text="signin_with"
-                            onSuccess={credentialResponse => {
-                                toast("Login Successfully");
-                                dispatch({
-                                    type: "SET_TOKEN",
-                                    token: credentialResponse.credential,
-                                });
-                                localStorage.setItem("token", JSON.stringify(credentialResponse.credential))
-                                navigate('/');
+                            onSuccess={
+                                async (credentialResponse) => {
 
-                            }}
+                                await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { token: credentialResponse.credential }
+                                ).then((response) => {
+                                    toast.success(response.data.message);
+                                    dispatch({
+                                        type: "SET_TOKEN",
+                                        token: response.data.token,
+                                    });
+                                    dispatch({
+                                        type: "SET_USER",
+                                        user: response.data.user,
+                                    });
+                                    if (response.data.user.role === 1) {
+                                        dispatch({
+                                            type: "SET_ROLE",
+                                            role: "admin",
+                                        })
+                                    }
+                                    localStorage.setItem("token", JSON.stringify(response.data.token));
+                                    localStorage.setItem("user", JSON.stringify(response.data.user));
+
+                                    navigate('/');
+                                  
+                                }).catch( (e) => {
+                                    toast.error("fail")
+                                    console.log(e)
+                                })
+                            }
+                                }
                             onError={() => {
                                 console.log('Login Failed');
                             }}

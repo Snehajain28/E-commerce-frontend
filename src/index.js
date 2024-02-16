@@ -12,11 +12,10 @@ root.render(
     <NewContextProvider>
         <BrowserRouter>
             <GoogleOAuthProvider clientId={process.env.CLIENT_ID}>
-                <App /> 
+                <App />
             </GoogleOAuthProvider>
         </BrowserRouter>
     </NewContextProvider >
 
 );
-
 

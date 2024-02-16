@@ -24,11 +24,11 @@ import AllProducts from "./pages/Admin/allProduct";
 import UserDetails from "./pages/Admin/UserDetails";
 import EditProduct from "./pages/Admin/EditProduct";
 import OrderSuccess from "./pages/OrderSuccess";
+import ForgotPassword from "./pages/ForgotPassword";
 
 
 function App() {
   const [{ role }, dispatch] = useStateValues();
-  
   useEffect((() => {
     const data = localStorage.getItem("token");
     let cart = localStorage.getItem("cart");
@@ -96,6 +96,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/product' element={<ProductDetails />} />
           <Route path="/about" element={<About />} />

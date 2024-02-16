@@ -85,7 +85,6 @@ function Checkout() {
       toast.success("Added Successfully");
     })
     setformData({ email: "", city: "", name: "", address: "", zip: "", phone: "", state: "" });
-    console.log(formData)
   }
 
   return (

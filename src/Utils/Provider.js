@@ -63,4 +63,3 @@ export function NewContextProvider({ children }) {
   </ContextData.Provider>
   )
 }
-
