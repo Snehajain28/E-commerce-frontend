@@ -3,22 +3,24 @@ import Navbar from '../components/Navbar';
 import Spinner from '../components/Spinner'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useStateValues } from '../Utils/Provider'
 
 
 export default function UserOrders() {
 
- 
-  const user = JSON.parse(localStorage.getItem("user"))
+
+  const [{ user }, dispatch] = useStateValues();
+
   let [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
 
   const getOrders = useCallback(async () => {
     setLoading(true)
-    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/orders`,{ id: user._id }
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/orders`, { id: user._id }
     ).then((response) => {
       setOrders(response.data.allOrders)
-      console.log(response)
+
     })
     setLoading(false)
   }, [user._id]);
@@ -30,7 +32,11 @@ export default function UserOrders() {
   return (
     <div >
       <Navbar />
-      <div className='h-[100vh] w-[100vw] '>
+      <div onClick={() => dispatch({
+        type: "SET_HAMBURGER",
+        hamburger: false,
+      })}
+        className='h-[100vh] w-[100vw] '>
         {
           loading ? (<div className='h-[100vh] w-[100vw] flex justify-center items-center'><Spinner /><p className='mt-[9rem] ml-2'>Loading...</p></div>) :
             (
@@ -40,17 +46,18 @@ export default function UserOrders() {
                     (
 
                       <div className=''>
-                        {console.log(orders)}
+                       
                         {orders.map((order) => {
                           return (
-                            <div className=''>
-                              <div className="mx-auto mt-12  max-w-7xl px-4 sm:px-6 lg:px-8">
+                            <Link className='border-[2px] w-[90vw]  border-gray-400'
+                             to={`/orders/${order._id}`}>
+                              <div className="mx-auto mt-10  max-w-7xl px-4 sm:px-6 lg:px-8">
                                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-                                  <h1 className="text-2xl md:text-4xl my-5 font-bold tracking-tight text-gray-900">
+                                  <h1 className="text-[1.2rem] md:text-4xl my-5 font-bold tracking-tight text-gray-900">
                                     Order # {order._id}
                                   </h1>
-                                  <h3 className="text-xl my-5 font-bold tracking-tight text-red-900">
-                                    Order Status : {"order.status"}
+                                  <h3 className="text-[1rem] my-5 font-bold tracking-tight text-red-900">
+                                    Order Status :<span className='bg-green-300 px-1 ml-2 rounded-lg'>{order.orderStatus}</span>
                                   </h3>
                                   <div className="">
                                     <ul className="-my-6 divide-y divide-gray-200">
@@ -60,19 +67,19 @@ export default function UserOrders() {
                                             <img
                                               src={item.image}
                                               alt=''
-                                              className="h-full w-full object-cover object-fit"
+                                              className="h-full w-full object-contain object-fit"
                                             />
                                           </div>
                                           <div className="ml-4 flex flex-1 flex-col">
                                             <div>
                                               <div className="flex justify-between text-base font-medium text-gray-900">
-                                                <h3>
-                                                  <a href={"item.product.id"}>{"item.product.title"}</a>
+                                                <h3 className='font-semibold'>
+                                                  <a href={"item.product.id"}>{item.title}</a>
                                                 </h3>
-                                                <p className="ml-4">${"item.product.discountPrice"}</p>
+                                                <p className="ml-4">${item.discountedPrice}</p>
                                               </div>
                                               <p className="mt-1 text-sm text-gray-500">
-                                                {"item.product.brand"}
+                                                {item.brand}
                                               </p>
                                             </div>
                                             <div className="flex flex-1 items-end justify-between text-sm">
@@ -97,41 +104,15 @@ export default function UserOrders() {
                                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                                   <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
-                                    <p>$ {"order.totalAmount"}</p>
+                                    <p>$ {order.amount}</p>
                                   </div>
                                   <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                                     <p>Total Items in Cart</p>
-                                    <p>{order?.items?.length} items</p>
-                                  </div>
-                                  <p className="mt-0.5 text-sm text-gray-500">
-                                    Shipping Address :
-                                  </p>
-                                  <div className="flex justify-between gap-x-6 px-5 py-5 border-solid border-2 border-gray-200">
-                                    <div className="flex gap-x-4">
-                                      <div className="min-w-0 flex-auto">
-                                        <p className="text-sm font-semibold leading-6 text-gray-900">
-                                          {order.address.name}
-                                        </p>
-                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                          {order.address.address}
-                                        </p>
-                                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                          {order.address.zip}
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <div className="hidden sm:flex sm:flex-col sm:items-end">
-                                      <p className="text-sm leading-6 text-gray-900">
-                                        Phone: {order.address.phone}
-                                      </p>
-                                      <p className="text-sm leading-6 text-gray-500">
-                                        {order.address.city}
-                                      </p>
-                                    </div>
+                                    <p>{order?.items?.length}</p>
                                   </div>
                                 </div>
                               </div>
-                            </div>)
+                            </Link>)
                         })
                         }
                       </div>)

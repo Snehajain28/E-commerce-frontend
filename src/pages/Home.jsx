@@ -12,29 +12,36 @@ import { lehngacholiPage2 } from '../data/Saree/lenghaCholiPage2';
 import { mensPantsPage1 } from '../data/pants/men_page1';
 import { dressPage1 } from '../data/dress/page1';
 import Search from '../components/Search';
+import { useStateValues } from '../Utils/Provider';
 
 function Home() {
 
-
+  const [{ hamburger }, dispatch] = useStateValues();
+  console.log(hamburger)
   return (
     <div>
-      <Navbar/>
-       <Carousel />
-     <Search/>
-      <div className='mt-1'>
-      <div className='space-y-10 py-5 flex flex-col justify-center px-5 lg:px-10'>
-        <HomeCarousel sectionName={"Gouns"} CarouselData={gounsPage1} />
-        <HomeCarousel sectionName={"Kurtas"} CarouselData={kurtaPage1} />
-        <HomeCarousel sectionName={"Lehnga"} CarouselData={lehngacholiPage2} />
-        <HomeCarousel sectionName={"Saree"} CarouselData={sareePage1} />
-        <HomeCarousel sectionName={"Shoes"} CarouselData={mensShoesPage1} />
-        <HomeCarousel sectionName={"Lehnga"} CarouselData={lengha_page1} />
-        <HomeCarousel sectionName={"Pants"} CarouselData={mensPantsPage1} />
-        <HomeCarousel sectionName={"Men's Kurta"} CarouselData={mens_kurta} />
-        <HomeCarousel sectionName={"Dress"} CarouselData={dressPage1} />
+      <Navbar />
+      <div onClick={() => dispatch({
+        type: "SET_HAMBURGER",
+        hamburger: false,
+      })}>
+        <Carousel />
+        <Search />
+        <div className='mt-1'>
+          <div className='space-y-10 py-5 flex flex-col justify-center px-5 lg:px-10'>
+            <HomeCarousel sectionName={"Gouns"} CarouselData={gounsPage1} />
+            <HomeCarousel sectionName={"Kurtas"} CarouselData={kurtaPage1} />
+            <HomeCarousel sectionName={"Lehnga"} CarouselData={lehngacholiPage2} />
+            <HomeCarousel sectionName={"Saree"} CarouselData={sareePage1} />
+            <HomeCarousel sectionName={"Shoes"} CarouselData={mensShoesPage1} />
+            <HomeCarousel sectionName={"Lehnga"} CarouselData={lengha_page1} />
+            <HomeCarousel sectionName={"Pants"} CarouselData={mensPantsPage1} />
+            <HomeCarousel sectionName={"Men's Kurta"} CarouselData={mens_kurta} />
+            <HomeCarousel sectionName={"Dress"} CarouselData={dressPage1} />
 
-      </div>
-      <Footer />
+          </div>
+          <Footer />
+        </div>
       </div>
     </div>
   );

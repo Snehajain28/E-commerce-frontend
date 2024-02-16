@@ -28,7 +28,8 @@ const OrderSuccess = () => {
             <div className="2xl:container 2xl:mx-auto py-14 px-4 md:px-6 xl:px-20">
                 <div className="flex flex-col xl:flex-row justify-center items-center space-y-10 xl:space-y-0 xl:space-x-8">
                     <div className="flex justify-center flex-col items-start w-full lg:w-9/12 xl:w-full ">
-                        <div>
+                      { order?.orderStatus === "created" &&
+                       <div>
                             <p className="text-base leading-none mt-4 text-indigo-800 font-extrabold mb-2">
                                 THANK YOU!
                             </p>
@@ -37,7 +38,8 @@ const OrderSuccess = () => {
                                 Your order  has been shipped and will be with you soon.
                             </p>
                         </div>
-                        <div className="mt-5">
+                       } 
+                       <div className="mt-5">
                             <h3 className="text-2xl xl:text-4xl leading-7 xl:leading-9 w-full font-bold  md:text-left text-gray-800">Payment</h3>
                             <p className="text-md leading-none mt-4 text-gray-800 font-semibold">
                                 Your Order ID is {id}.

@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <NewContextProvider>
         <BrowserRouter>
-            <GoogleOAuthProvider clientId={process.env.CLIENT_ID}>
+            <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
                 <App />
             </GoogleOAuthProvider>
         </BrowserRouter>

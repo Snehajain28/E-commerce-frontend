@@ -36,7 +36,7 @@ export default function Login() {
         await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { email: formData.email, password: formData.password }
         ).then((response) => {
 
-            toast.success(response.data.message);
+            toast.success("Logged in");
             dispatch({
                 type: "SET_TOKEN",
                 token: response.data.token,
@@ -53,9 +53,9 @@ export default function Login() {
             }
             localStorage.setItem("token", JSON.stringify(response.data.token));
             localStorage.setItem("user", JSON.stringify(response.data.user));
-
-            navigate('/');
             console.log(user)
+            navigate('/');
+
         })
             .catch((e) => {
                 toast.error(e.response.data.message);
@@ -149,38 +149,38 @@ export default function Login() {
                             onSuccess={
                                 async (credentialResponse) => {
 
-                                await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { token: credentialResponse.credential }
-                                ).then((response) => {
-                                    toast.success(response.data.message);
-                                    dispatch({
-                                        type: "SET_TOKEN",
-                                        token: response.data.token,
-                                    });
-                                    dispatch({
-                                        type: "SET_USER",
-                                        user: response.data.user,
-                                    });
-                                    if (response.data.user.role === 1) {
+                                    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { token: credentialResponse.credential }
+                                    ).then((response) => {
+                                        toast.success(response.data.message);
                                         dispatch({
-                                            type: "SET_ROLE",
-                                            role: "admin",
-                                        })
-                                    }
-                                    localStorage.setItem("token", JSON.stringify(response.data.token));
-                                    localStorage.setItem("user", JSON.stringify(response.data.user));
+                                            type: "SET_TOKEN",
+                                            token: response.data.token,
+                                        });
+                                        dispatch({
+                                            type: "SET_USER",
+                                            user: response.data.user,
+                                        });
+                                        if (response.data.user.role === 1) {
+                                            dispatch({
+                                                type: "SET_ROLE",
+                                                role: "admin",
+                                            })
+                                        }
+                                        localStorage.setItem("token", JSON.stringify(response.data.token));
+                                        localStorage.setItem("user", JSON.stringify(response.data.user));
 
-                                    navigate('/');
-                                  
-                                }).catch( (e) => {
-                                    toast.error("fail")
-                                    console.log(e)
-                                })
-                            }
+                                        navigate('/');
+
+                                    }).catch((e) => {
+                                        toast.error("fail")
+                                        console.log(e)
+                                    })
                                 }
+                            }
                             onError={() => {
                                 console.log('Login Failed');
                             }}
-                            useOneTap
+                           
                         />
                     </div>
                     <p className="mt-10 text-center text-sm text-gray-500">

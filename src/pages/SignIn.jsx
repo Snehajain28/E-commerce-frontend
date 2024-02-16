@@ -5,7 +5,7 @@ import Spinner from "../components/Spinner";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { passwordStrength } from 'check-password-strength'
-import { useGeolocated } from "react-geolocated";
+//import { useGeolocated } from "react-geolocated";
 import { TbEyeClosed } from "react-icons/tb";
 import { FaEye } from "react-icons/fa";
 
@@ -26,13 +26,14 @@ export default function SignIn() {
         password: "",
     })
 
-    const { coords } =
-        useGeolocated({
-            positionOptions: {
-                enableHighAccuracy: false,
-            },
-            userDecisionTimeout: 5000,
-        });
+    /*  const { coords } =
+          useGeolocated({
+              positionOptions: {
+                  enableHighAccuracy: false,
+              },
+              userDecisionTimeout: 5000,
+          });
+          */
     const changeHandler = (e) => {
 
         setformData({
@@ -41,7 +42,7 @@ export default function SignIn() {
         });
 
     }
-    console.log(coords)
+
     const handleSubmit = async (e) => {
         setSpinner(true);
         e.preventDefault();
@@ -52,19 +53,16 @@ export default function SignIn() {
             setSpinner(false)
             return;
         }
-        if(formData.password !== formData.cnfrm)
-        {
+        if (formData.password !== formData.cnfrm) {
             toast.error("Password doesn't match");
             setSpinner(false)
             return;
         }
-        if(formData?.phoneNumber?.length < 10 || formData?.phoneNumber?.length >10)
-        {
+        if (formData?.phoneNumber?.length < 10 || formData?.phoneNumber?.length > 10) {
             toast.error("Invalid Phone");
             setSpinner(false)
             return;
         }
-        console.log(formData)
         const res = await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/register`, {
             name: formData.name,
             email: formData.email,
@@ -195,7 +193,7 @@ export default function SignIn() {
                     or
                     <hr className="w-[10rem] h-[2px] bg-gray-300" />
                 </div>
-               
+
                 <p className="mt-8 text-[13px] font-semibold text-center text-gray-700">
                     {" "}
                     Already have an account?{" "}

@@ -1,26 +1,24 @@
 import { useState } from 'react'
 import { useStateValues } from '../Utils/Provider'
-import {  FaSignOutAlt, FaShopify, FaList, FaShoppingCart, FaUserAlt, } from "react-icons/fa";
+import { FaSignOutAlt, FaShopify, FaList, FaShoppingCart, FaUserAlt, } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { Link, } from "react-router-dom";
-import { MdClose,  MdContactSupport } from "react-icons/md";
-import { HiHome,HiMenuAlt2 } from "react-icons/hi";
-import {  TbMenuOrder } from "react-icons/tb";
-import {  BiUserCircle } from 'react-icons/bi';
+import { MdClose, MdContactSupport } from "react-icons/md";
+import { HiHome, HiMenuAlt2 } from "react-icons/hi";
+import { TbMenuOrder } from "react-icons/tb";
+import { BiUserCircle } from 'react-icons/bi';
 
 
 
 export default function Navbar() {
 
-  const [{ token, cartData }, dispatch] = useStateValues();
+  const [{ token, cartData, hamburger }, dispatch] = useStateValues();
   const showMenu = true;
-  const [sidenav, setSidenav] = useState(false);
   const [category, setCategory] = useState(false);
   const [brand, setBrand] = useState(false);
 
 
   const logoutHandler = async () => {
-    setSidenav(false);
     try {
       if (token) {
         dispatch({
@@ -31,8 +29,14 @@ export default function Navbar() {
           type: "SET_USER",
           user: null,
         });
+        dispatch({
+          type: "SET_HAMBURGER",
+          hamburger:false,
+        })
         localStorage.removeItem("token");
-        localStorage.removeItem("cartData");
+        localStorage.removeItem("cart");
+        localStorage.removeItem("user");
+
       }
       toast.success("Sign Out Successfully");
     } catch (error) {
@@ -81,60 +85,78 @@ export default function Navbar() {
                 (<Link to={'/cart'} >
                   <div className=' flex items-center w-[5rem] px-2 py-2  text-white font-semibold ml-[-7rem] md:ml-[0rem] gap-1 rounded-full bg-red-600'>
                     <FaShoppingCart /> Cart
-                    </div>
-                    <div className='absolute md:top-1 top-0 animate-bounce md:right-3 right-8 bg-green-500 px-[0.5rem] py-0 rounded-full text-white'
-                    >{cartData.length}</div>  
+                  </div>
+                  <div className='absolute md:top-1 top-0 animate-bounce md:right-3 right-8 bg-green-500 px-[0.5rem] py-0 rounded-full text-white'
+                  >{cartData.length}</div>
                 </Link>) :
                 (<Link to={'/login'} className=' flex md:ml-[0rem] items-center w-[5rem] px-2 py-2  text-white font-semibold ml-[-7rem] gap-2 rounded-full bg-red-600'>
-                  <FaUserAlt />Login 
+                  <FaUserAlt />Login
                 </Link>)
               )
             }
             {
-              !sidenav ?
+              !hamburger ?
                 (<HiMenuAlt2
-                  onClick={() => setSidenav(!sidenav)}
+                  onClick={() => dispatch({
+                    type: "SET_HAMBURGER",
+                    hamburger: true,
+                  })}
                   className="inline-block sm:hidden cursor-pointer w-8 h-6 absolute top-6 right-4"
                 />) :
                 (
                   <MdClose
-                    onClick={() => setSidenav(!sidenav)}
+                  onClick={() => dispatch({
+                    type: "SET_HAMBURGER",
+                    hamburger:false,
+                  })}
                     className="inline-block md:hidden cursor-pointer w-8 h-6 absolute top-6 right-4"
                   />
                 )
             }
 
-            {sidenav && (
+            {hamburger && (
 
-              <div className="fixed top-0 right-0 w-10/12 mt-[5rem] bg-gray-300 bg-opacity-80 z-50">
+              <div className="fixed md:hidden top-[4rem] right-2 px-4 bg-gray-300 bg-opacity-80 z-50">
                 <div
                   className=" relative" >
                   <div className="p-7">
 
-                    <ul className=" flex flex-col gap-5 py-[2rem]">
+                    <ul className=" flex flex-col gap-5 ">
                       <Link className='flex border-b-[1px] items-center gap-2'
                         to={'/'}
-                        onClick={() => setSidenav(false)}
+                        onClick={() => dispatch({
+                          type: "SET_HAMBURGER",
+                          hamburger:false,
+                        })}
                       > <HiHome size={20} /><span>Home</span>
                       </Link>
                       <Link className='flex border-b-[1px] items-center gap-2'
-                        to={'/product'}
-                        onClick={() => setSidenav(false)}
+                        to={'/shop'}
+                         onClick={() => dispatch({
+                          type: "SET_HAMBURGER",
+                          hamburger:false,
+                        })}
                       >
                         <FaShopify />{"Shop"}
                       </Link>
                       {token &&
                         <Link className='flex border-b-[1px] items-center gap-2'
-                          to={'/'}
-                          onClick={() => setSidenav(false)}
+                          to={'/orders'}
+                          onClick={() => dispatch({
+                            type: "SET_HAMBURGER",
+                            hamburger:false,
+                          })}
                         >
                           <TbMenuOrder />{"My Orders"}
                         </Link>
                       }
                       {token &&
                         <Link className='flex border-b-[1px] items-center gap-2'
-                          to={'/'}
-                          onClick={() => setSidenav(false)}
+                          to={'/profile'}
+                          onClick={() => dispatch({
+                            type: "SET_HAMBURGER",
+                            hamburger:false,
+                          })}
                         >
                           <BiUserCircle />{"My Account"}
                         </Link>
@@ -142,13 +164,19 @@ export default function Navbar() {
                       }
                       <Link className='flex  items-center gap-2'
                         to={'/contact'}
-                        onClick={() => setSidenav(false)}
+                        onClick={() => dispatch({
+                          type: "SET_HAMBURGER",
+                          hamburger:false,
+                        })}
                       >
                         <MdContactSupport /> {"Contact"}
                       </Link>
                       <Link className='flex items-center gap-2'
                         to={'/about'}
-                        onClick={() => setSidenav(false)}
+                        onClick={() => dispatch({
+                          type: "SET_HAMBURGER",
+                          hamburger:false,
+                        })}
                       >
                         <FaList /> {"About"}
                       </Link>

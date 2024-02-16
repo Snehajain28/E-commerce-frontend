@@ -9,6 +9,8 @@ const initialState = {
  totalAmt:0,
  user:null,
  role:"user",
+ hamburger:false,
+ info:false,
 }
 
 
@@ -22,6 +24,16 @@ const reducers = (state, action) => {
           cartData: action.cartData,
         };
        
+      case "SET_INFO":
+        return {
+          ...state,
+          info: action.info,
+        };
+      case "SET_HAMBURGER":
+        return {
+          ...state,
+          hamburger: action.hamburger,
+        };
         case "SET_USER":
           return {
             ...state,
