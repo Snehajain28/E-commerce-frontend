@@ -63,7 +63,7 @@ function Checkout() {
 
 
   const getAddress = useCallback(async () => {
-    await axios.post('http://localhost:5000/api/v1/user/checkout/address', { email: user.email }
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/checkout/address`, { email: user.email }
     ).then((response) => {
       setAddress(response.data.allAddress)
     })
@@ -79,7 +79,7 @@ function Checkout() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/v1/user/checkout/add-address', { email: formData.email, city: formData.city, name: formData.name, address: formData.address, zip: formData.zip, phone: formData.phone, state: formData.state }
+    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/checkout/add-address`, { email: formData.email, city: formData.city, name: formData.name, address: formData.address, zip: formData.zip, phone: formData.phone, state: formData.state }
     ).then((response) => {
       getAddress();
       toast.success("Added Successfully");

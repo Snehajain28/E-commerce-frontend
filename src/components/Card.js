@@ -7,7 +7,7 @@ export default function Card({ item }) {
     const navigate = useNavigate();
     const [click, setClick] = useState(false)
     const [{ token, cartData }, dispatch] = useStateValues();
-  
+
     useEffect((() => {
 
         if (cartData?.length > 0) {
@@ -18,7 +18,7 @@ export default function Card({ item }) {
                 }
             });
         }
-    }), [cartData,item.image])
+    }), [cartData, item.image])
 
     const handleClick = () => {
 
@@ -46,7 +46,7 @@ export default function Card({ item }) {
         if (!click) {
 
             let arr = cartData;
-            
+
             arr?.push(item)
             dispatch({
                 type: "SET_CART_DATA",
@@ -83,9 +83,8 @@ export default function Card({ item }) {
 
                 </div>
                 <div className='flex justify-between mx-auto w-10/12'>
-                    <p className='text-green-400'>₹{item.discountedPrice}</p>
                     <p className='line-through'>₹{item.price}</p>
-
+                    <p className='text-green-400'>₹{item.discountedPrice}</p>
                 </div>
             </div>
             <button onClick={handleCart} className='w-11/12 mx-auto rounded-md h-[2rem] text-white font-semibold  bg-blue-500 my-4 '>

@@ -17,6 +17,9 @@ const OrderSuccess = () => {
                 })
         }
         getDetails();
+        window.scroll({
+            top:0
+        })
     }), [id])
 
     return (
@@ -35,22 +38,22 @@ const OrderSuccess = () => {
                             </p>
                         </div>
                         <div className="mt-5">
-                            <h3 className="text-3xl xl:text-4xl leading-7 xl:leading-9 w-full font-bold  md:text-left text-gray-800">Payment</h3>
-                            <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
+                            <h3 className="text-2xl xl:text-4xl leading-7 xl:leading-9 w-full font-bold  md:text-left text-gray-800">Payment</h3>
+                            <p className="text-md leading-none mt-4 text-gray-800 font-semibold">
                                 Your Order ID is {id}.
                             </p>
                         </div>
-                        <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
+                        <p className="text-sm leading-none mt-4 text-gray-800 font-semibold">
                             Order Payment Status: <span className=" text-red-700 bg-red-100 rounded-lg px-2 py-1">Not Paid</span>
                         </p>
                         {order?.orderStatus === "deliverd" ?
-                            <div> <p className="text-base leading-none mt-4 text-gray-800 font-semibold">
+                            <div> <p className="text-sm leading-none mt-4 text-gray-800 font-semibold">
                                 Order Delivery Status: <span className="text-green-700 bg-green-100 rounded-lg px-2 py-1">Delivered on {""}</span>
                             </p>
                                 <button type="button" className="mt-5 text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Order Delivered Successfully</button>
                             </div>
                             :
-                            <p className="text-base leading-none mt-6 text-gray-800 font-semibold">
+                            <p className="text-sm leading-none mt-6 text-gray-800 font-semibold">
                                 Order Delivery Status: <span className=" text-red-700 bg-red-100 rounded-lg px-2 py-1">Not Delivered</span>
                             </p>
                         }
@@ -87,7 +90,7 @@ const OrderSuccess = () => {
                             <div className="flex justify-start items-start flex-col md:flex-row  w-full md:w-auto space-y-8 md:space-y-0 md:space-x-14 xl:space-x-8  lg:w-full">
                                 <div className="flex jusitfy-start items-start flex-col space-y-2">
                                     <p className="text-base font-semibold leading-4  text-gray-800">Billing Address</p>
-                                    <p className="text-sm leading-5 text-gray-600">order?.address</p>
+                                    <p className="text-sm leading-5 text-gray-600">{order?.address?.email}</p>
                                 </div>
                                 <div className="flex jusitfy-start items-start flex-col space-y-2">
                                     <p className="text-base font-semibold leading-4  text-gray-800">Shipping Address</p>
