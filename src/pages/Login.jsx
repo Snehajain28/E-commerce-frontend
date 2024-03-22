@@ -5,7 +5,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { useStateValues } from "../Utils/Provider";
 import Spinner from "../components/Spinner";
-import { GoogleLogin } from '@react-oauth/google';
 import { TbEyeClosed } from "react-icons/tb";
 import { FaEye } from "react-icons/fa";
 
@@ -64,7 +63,7 @@ export default function Login() {
     }
 
     return (
-        <div className='h-[100vh]  '>
+        <div className='h-[100vh] overflow-y-hidden '>
             <div className=" flex xl:w-[20vw] w-[90vw]  xs:w-[60vw] md:w-[40vw] lg:w-[30vw] mx-auto  flex-col justify-center items-center px-6 py-12 lg:px-8">
                 <div className="">
                     <h2 className=" text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
@@ -114,7 +113,7 @@ export default function Login() {
                                     </Link>
                                 </div>
                             </div>
-                            <div className="mt-2">
+                            <div className="mt-2 flex w-full justify-evenly    items-center">
                                 <input
                                     id="password"
                                     placeholder="password"
@@ -125,7 +124,7 @@ export default function Login() {
                                     type={show ? "text" : "password"}
                                     className="block w-full  px-3 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 />
-                                <div className='mt-[-1.7rem] xs:ml-[45vw] lg:ml-[22vw]  ml-[64vw]' onClick={() => { setShow(!show) }}>
+                                <div className=' absolute md:ml-[13rem]  ml-[13rem] mb:ml-[16rem]' onClick={() => { setShow(!show) }}>
                                     {show ? <TbEyeClosed size={20} /> : <FaEye size={20} />}
                                 </div>
                             </div>
@@ -143,46 +142,7 @@ export default function Login() {
                         or
                         <hr className="w-[10rem] h-[2px] bg-gray-300" />
                     </div>
-                    <div className="">
-                        <GoogleLogin
-                            text="signin_with"
-                            onSuccess={
-                                async (credentialResponse) => {
-
-                                    await axios.post(`${process.env.REACT_APP_API_ENDPOINT}/api/v1/user/login`, { token: credentialResponse.credential }
-                                    ).then((response) => {
-                                        toast.success(response.data.message);
-                                        dispatch({
-                                            type: "SET_TOKEN",
-                                            token: response.data.token,
-                                        });
-                                        dispatch({
-                                            type: "SET_USER",
-                                            user: response.data.user,
-                                        });
-                                        if (response.data.user.role === 1) {
-                                            dispatch({
-                                                type: "SET_ROLE",
-                                                role: "admin",
-                                            })
-                                        }
-                                        localStorage.setItem("token", JSON.stringify(response.data.token));
-                                        localStorage.setItem("user", JSON.stringify(response.data.user));
-
-                                        navigate('/');
-
-                                    }).catch((e) => {
-                                        toast.error("fail")
-                                        console.log(e)
-                                    })
-                                }
-                            }
-                            onError={() => {
-                                console.log('Login Failed');
-                            }}
-                           
-                        />
-                    </div>
+                   
                     <p className="mt-10 text-center text-sm text-gray-500">
                         Not a member?{' '}
                         <Link

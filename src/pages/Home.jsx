@@ -11,7 +11,6 @@ import { sareePage1 } from '../data/Saree/page1';
 import { lehngacholiPage2 } from '../data/Saree/lenghaCholiPage2';
 import { mensPantsPage1 } from '../data/pants/men_page1';
 import { dressPage1 } from '../data/dress/page1';
-import Search from '../components/Search';
 import { useStateValues } from '../Utils/Provider';
 
 function Home() {
@@ -26,9 +25,8 @@ function Home() {
         hamburger: false,
       })}>
         <Carousel />
-        <Search />
-        <div className='mt-1'>
-          <div className='space-y-10 py-5 flex flex-col justify-center px-5 lg:px-10'>
+<div className='mt-1'>
+          <div className=' md:w-[90vw]  mx-auto flex flex-col justify-center lg:px-10'>
             <HomeCarousel sectionName={"Gouns"} CarouselData={gounsPage1} />
             <HomeCarousel sectionName={"Kurtas"} CarouselData={kurtaPage1} />
             <HomeCarousel sectionName={"Lehnga"} CarouselData={lehngacholiPage2} />

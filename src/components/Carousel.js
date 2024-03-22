@@ -28,11 +28,11 @@ const main_Carousel = [
 ]
 
 
-const items = main_Carousel.map((item) => { return (<img alt="" src={item.img} className='-z-10 lg:h-[30rem] '></img>) })
+const items = main_Carousel.map((item) => { return (<img alt="" src={item.img} className='lg:w-[90vw] mx-auto rounded-lg'></img>) })
 
 const Carousel = () => (
   
-    <div div className = 'mt-[4rem]'>
+    <div className = 'mt-[4rem]'>
     <AliceCarousel
         autoPlay
         autoPlayStrategy="none"

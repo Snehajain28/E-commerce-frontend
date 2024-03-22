@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Search from "../components/Search";
 import Footer from "../components/Footer";
 
 const About = () => {
@@ -9,7 +8,6 @@ const About = () => {
   return (
     <div className="max-w-container mx-auto px-4">
       <Navbar/>
-      <Search/>
       <div className="pb-10">
         <h1 className="max-w-[600px] text-base text-lightText mb-2">
           <span className="text-primeColor font-semibold text-lg">Our Business</span>{" "}

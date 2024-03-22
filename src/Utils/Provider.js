@@ -6,6 +6,7 @@ const initialState = {
  token:"",
  productDetails:null,
  cartData:[],
+ favorites:[],
  totalAmt:0,
  user:null,
  role:"user",
@@ -22,6 +23,12 @@ const reducers = (state, action) => {
         return {
           ...state,
           cartData: action.cartData,
+        };
+        
+      case "SET_FAVORITES":
+        return {
+          ...state,
+          favorites: action.favorites,
         };
        
       case "SET_INFO":
@@ -70,7 +77,7 @@ export const useStateValues = () => useContext(ContextData);
 
 export function NewContextProvider({ children }) {
 
-  return (<ContextData.Provider value={useReducer(reducers, { initialState })} >
+  return (<ContextData.Provider value={useReducer(reducers, initialState)} >
     {children}
   </ContextData.Provider>
   )
